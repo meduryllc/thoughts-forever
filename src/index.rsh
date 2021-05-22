@@ -1,39 +1,77 @@
 'reach 0.1';
 
+const [ isStatus, START, STOP ] = makeEnum(2);
+
 const Poster = {
   post: Fun([], Bytes(128)),
+  continueStream: Fun([], UInt),
+  createStream: Fun([], Bytes(128)),
+  streamName : Bytes(128)
 };
 
 const Subscriber = {
   subscribe: Fun([],Bool),
   seeMessage: Fun([Bytes(128)], Null),
+  seeStream: Fun([Bytes(128)], Bool)
+}
+
+const getStatus = (s) => {
+    if(s=='STOP') return 1;
+    else return 0;
 }
 
 export const main = Reach.App(
     {},
     [Participant('Alice', Poster), Participant('Bob', Subscriber)],
     (A, B) => {
+      
       A.only(() => {
-        /*
-        const messages = Array.replicate(5, "message");
-        const somelist = messages.set(0, declassify(interact.post())); 
-        */
-        const message = declassify(interact.post()); 
+        const streamName = declassify(interact.createStream());
       });
-      A.publish(message);
-      // Constraints here
+      
+      A.publish(streamName);
       commit();
 
       B.only(() => {
-        const status = declassify(interact.subscribe()); });
-      B.publish(status);
+        const subscribe = declassify(interact.seeStream(streamName));
+      });
+      B.publish(subscribe);
+      
+      var status = START;
+      invariant(balance() == 0);
+      while(status == START){
+        
+        commit();
 
+        A.only(() => {
+          const message = declassify(interact.post()); 
+        });
+        A.publish(message);
+        // Constraints here
+        commit();
+
+        /*
+        B.only(() => {
+          const didSubscribe = declassify(interact.subscribe()); });
+        B.publish(didSubscribe);
+
+        commit();
+        */
+        B.only(() => {
+          //declassify(interact.seeMessage(somelist[0])); });
+          declassify(interact.seeMessage(message)); });
+
+        A.only(() => {
+          const stopNow = declassify(interact.continueStream());
+        })
+        A.publish(stopNow);
+
+        status = getStatus(stopNow);
+        //status = isStatus(stopNow);
+
+        continue;
+      }
       commit();
-
-      B.only(() => {
-        //declassify(interact.seeMessage(somelist[0])); });
-        declassify(interact.seeMessage(message)); });
-
       exit(); 
     
     }
