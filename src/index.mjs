@@ -33,6 +33,7 @@ import * as backend from './build/index.main.mjs';
       const options = [0,1];
       const random = Math.floor(Math.random() * 2);
       const choice = options[random];
+      
       const stopOrContinue = choice == 0 ? 'CONTINUE' : 'STOP';
       console.log(`${Who} chose to ${stopOrContinue} the stream`);
       return choice;

@@ -15,11 +15,6 @@ const Subscriber = {
   seeStream: Fun([Bytes(128)], Bool)
 }
 
-const getStatus = (s) => {
-    if(s=='STOP') return 1;
-    else return 0;
-}
-
 export const main = Reach.App(
     {},
     [Participant('Alice', Poster), Participant('Bob', Subscriber)],
@@ -66,8 +61,8 @@ export const main = Reach.App(
         })
         A.publish(stopNow);
 
-        status = getStatus(stopNow);
-        //status = isStatus(stopNow);
+        status = stopNow;
+       
 
         continue;
       }
