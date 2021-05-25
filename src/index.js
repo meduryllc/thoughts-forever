@@ -75,12 +75,33 @@ class Subscriber extends React.Component {
     this.setState({view: 'Attaching'});
     backend.Bob(ctc, this);
   }
-
+  async seeStream(streamName){
+    await new Promise(resolveAcceptedP => {
+      this.setState({view: 'ViewStreamName', streamName, resolveAcceptedP});
+    });
+    return true;
+  }
+  async post(){
+    await new Promise(resolveAcceptedP => {
+      this.setState({view: 'PostThought', resolveAcceptedP});
+    });
+    
+  }
   async acceptWager(wagerAtomic) { // Fun([UInt], Null)
     const wager = reach.formatCurrency(wagerAtomic, 4);
     return await new Promise(resolveAcceptedP => {
       this.setState({view: 'AcceptTerms', wager, resolveAcceptedP});
     });
+  }
+  subscribe(yesOrNo) {
+    
+    if(yesOrNo == 'Yes'){
+      this.state.resolveAcceptedP();
+      this.setState({view: 'WaitingForTurn'});
+    }
+    else{
+      this.setState({view: 'Attach'});
+    }
   }
   termsAccepted() {
     this.state.resolveAcceptedP();

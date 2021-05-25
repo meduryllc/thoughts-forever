@@ -78,7 +78,7 @@ exports.WaitingForAttacher = class extends React.Component {
     const {ctcInfoStr} = this.props;
     return (
       <div>
-        Waiting for Attacher to join...
+        Waiting for Subscribers 
         <br /> Please give them this contract info:
         <pre className='ContractInfo'>
           {ctcInfoStr}

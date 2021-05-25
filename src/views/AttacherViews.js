@@ -8,7 +8,7 @@ exports.Wrapper = class extends React.Component {
     const {content} = this.props;
     return (
       <div className="Attacher">
-        <h2>Attacher (Bob)</h2>
+        <h2>Subscriber (Bob)</h2>
         {content}
       </div>
     );
@@ -40,13 +40,36 @@ exports.Attach = class extends React.Component {
 
 exports.Attaching = class extends React.Component {
   render() {
+    const {streamName} = this.props;
     return (
       <div>
-        Attaching, please wait...
+        Subscribing to {streamName}
       </div>
     );
   }
 }
+
+exports.ViewStreamName = class extends React.Component {
+  render() {
+    const {parent, streamName} = this.props;
+    return (
+      <div>
+        Do you want to subscribe to: <strong>{streamName}</strong>?
+         <button
+          onClick={() => {
+            parent.subscribe('Yes');
+          }}
+        >Yes</button>
+        <button
+          onClick={() => {
+            parent.subscribe('No');
+          }}
+        >No</button>
+      </div>
+    );
+  }
+}
+
 
 exports.AcceptTerms = class extends React.Component {
   render() {
@@ -73,8 +96,8 @@ exports.WaitingForTurn = class extends React.Component {
   render() {
     return (
       <div>
-        Waiting for the other player...
-        <br />Think about which move you want to play.
+        Waiting for posts...
+        <br />
       </div>
     );
   }
