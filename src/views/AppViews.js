@@ -7,10 +7,12 @@ exports.Wrapper = class extends React.Component {
     const {content} = this.props;
     return (
       <div className="App">
+        
         <header className="App-header" id="root">
           <h1>Thoughts-Forever</h1>
           {content}
         </header>
+        
       </div>
     );
   }

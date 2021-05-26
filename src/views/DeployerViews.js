@@ -10,7 +10,7 @@ exports.Wrapper = class extends React.Component {
     const {content} = this.props;
     return (
       <div className="Deployer">
-        <h2>Deployer (Alice)</h2>
+        
         {content}
       </div>
     );
@@ -23,6 +23,7 @@ exports.CreateStream = class extends React.Component {
     const streamName = (this.state || {}).streamName || defaultStream
     return (
       <div>
+        <h2>Create Stream</h2>
         <input
           type='text'
           style={{height: "30px", width: "400px"}}
@@ -98,6 +99,7 @@ exports.PostThought = class extends React.Component {
     const thought = (this.state || {}).thought;
     return (
       <div>
+        <h2>Create Posts</h2>
         <textarea
           placeholder='Enter your thoughts here'
           onChange={(e) => this.setState({thought: e.currentTarget.value})}

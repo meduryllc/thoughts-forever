@@ -13,6 +13,7 @@ code {
 }
 .App {
   text-align: center;
+  
 }
 
 .App-header {
@@ -35,13 +36,20 @@ input[type=number] {
   width: 4em;
 }
 
+input[type=text] {
+  border-radius: 10px;
+  width: 4em;
+}
+
 button {
   font-size: calc(10px + 2vmin);
-  margin: 10px;
+  margin-top: 50px;
+  margin-left: 10px;
 }
 
 textarea {
   font-size: calc(10px + 2vmin);
+  border-radius: 10px;
 }
 
 .ContractInfo {

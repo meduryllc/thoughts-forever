@@ -92,7 +92,7 @@ class Poster extends React.Component {
 class Subscriber extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {view: 'Attach'};
+    this.state = {view: 'Attach', posts: []};
   }
   attach(ctcInfoStr) {
     const ctc = this.props.acc.attach(backend, JSON.parse(ctcInfoStr));
@@ -115,8 +115,8 @@ class Subscriber extends React.Component {
   }
   */
   async seeMessage(post){
-    console.log(post);
-    this.setState({view: 'ViewPost', post});
+    
+    this.setState({view: 'ViewPost', posts: [...this.state.posts, post]});
   }
 
   subscribe(yesOrNo) {

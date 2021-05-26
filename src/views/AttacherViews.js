@@ -8,7 +8,7 @@ exports.Wrapper = class extends React.Component {
     const {content} = this.props;
     return (
       <div className="Attacher">
-        <h2>Subscriber (Bob)</h2>
+        <h2>Read Posts</h2>
         {content}
       </div>
     );
@@ -70,34 +70,13 @@ exports.ViewStreamName = class extends React.Component {
   }
 }
 
-exports.ViewStreamName = class extends React.Component {
-  render() {
-    const {parent, streamName} = this.props;
-    return (
-      <div>
-        Do you want to subscribe to: <strong>{streamName}</strong>?
-         <button
-          onClick={() => {
-            parent.subscribe('Yes');
-          }}
-        >Yes</button>
-        <button
-          onClick={() => {
-            parent.subscribe('No');
-          }}
-        >No</button>
-      </div>
-    );
-  }
-}
-
 
 exports.ViewPost = class extends React.Component {
   render() {
-    const {parent, post} = this.props;
+    const {parent, posts} = this.props;
     return (
       <div>
-        They posted: <strong>{post}</strong>
+        They posted: <strong>{posts}</strong>
       </div>
     );
   }
