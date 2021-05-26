@@ -70,23 +70,34 @@ exports.ViewStreamName = class extends React.Component {
   }
 }
 
-
-exports.AcceptTerms = class extends React.Component {
+exports.ViewStreamName = class extends React.Component {
   render() {
-    const {wager, standardUnit, parent} = this.props;
-    const {disabled} = this.state || {};
+    const {parent, streamName} = this.props;
     return (
       <div>
-        The terms of the game are:
-        <br /> Wager: {wager} {standardUnit}
-        <br />
-        <button
-          disabled={disabled}
+        Do you want to subscribe to: <strong>{streamName}</strong>?
+         <button
           onClick={() => {
-            this.setState({disabled: true});
-            parent.termsAccepted();
+            parent.subscribe('Yes');
           }}
-        >Accept terms and pay wager</button>
+        >Yes</button>
+        <button
+          onClick={() => {
+            parent.subscribe('No');
+          }}
+        >No</button>
+      </div>
+    );
+  }
+}
+
+
+exports.ViewPost = class extends React.Component {
+  render() {
+    const {parent, post} = this.props;
+    return (
+      <div>
+        They posted: <strong>{post}</strong>
       </div>
     );
   }

@@ -52,6 +52,30 @@ class Poster extends React.Component {
   async createStream() { 
     return this.state.streamName; 
   }
+
+  async post(){
+    const thought = await new Promise(resolvePostedP => {
+      this.setState({view: 'PostThought', resolvePostedP});
+    });
+    this.setState({view: 'SeePost', thought});
+    return thought;
+  }
+
+  async continueStream(){
+    const decision = await new Promise(resolveContinueP => {
+      this.setState({view: 'ContinueOrStop', resolveContinueP});
+    });
+    return decision;
+  }
+
+  async postThought(thought) { this.state.resolvePostedP(thought); }
+
+  async continue(decision) { 
+    if(decision == 'Continue') decision = 0;
+    else if(decision == 'Stop') decision = 1;
+    this.state.resolveContinueP(decision);
+  }
+
   async deploy() {
     const ctc = this.props.acc.deploy(backend);
     this.setState({view: 'Deploying', ctc});
@@ -81,18 +105,20 @@ class Subscriber extends React.Component {
     });
     return true;
   }
-  async post(){
-    await new Promise(resolveAcceptedP => {
-      this.setState({view: 'PostThought', resolveAcceptedP});
-    });
-    
-  }
+  
+  /*
   async acceptWager(wagerAtomic) { // Fun([UInt], Null)
     const wager = reach.formatCurrency(wagerAtomic, 4);
     return await new Promise(resolveAcceptedP => {
       this.setState({view: 'AcceptTerms', wager, resolveAcceptedP});
     });
   }
+  */
+  async seeMessage(post){
+    console.log(post);
+    this.setState({view: 'ViewPost', post});
+  }
+
   subscribe(yesOrNo) {
     
     if(yesOrNo == 'Yes'){

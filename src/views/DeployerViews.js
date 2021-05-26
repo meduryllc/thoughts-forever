@@ -91,4 +91,61 @@ exports.WaitingForAttacher = class extends React.Component {
   }
 }
 
+exports.PostThought = class extends React.Component {
+  render() {
+    const {parent, defaultStream} = this.props;
+    const streamName = (this.state || {}).streamName || defaultStream;
+    const thought = (this.state || {}).thought;
+    return (
+      <div>
+        <textarea
+          placeholder='Enter your thoughts here'
+          onChange={(e) => this.setState({thought: e.currentTarget.value})}
+        /> 
+        <br />
+        <button
+         
+          onClick={() => parent.postThought(thought)}
+        >Create</button>
+      </div>
+    );
+  }
+}
+
+exports.SeePost = class extends React.Component {
+  render() {
+    const {parent, thought} = this.props;
+    return (
+      <div>
+        You just posted: 
+        <h3><strong>{thought}</strong></h3>
+         
+      </div>
+    );
+  }
+}
+
+exports.ContinueOrStop = class extends React.Component {
+  render() {
+    const {parent, thought} = this.props;
+    return (
+      <div>
+          Do you want to continue or stop posting?
+         <button
+          onClick={() => {
+            parent.continue('Continue');
+          }}
+        >Continue</button>
+        <button
+          onClick={() => {
+            parent.continue('Stop');
+          }}
+        >Stop</button>
+      </div>
+    );
+  }
+}
+
+
+
 export default exports;
