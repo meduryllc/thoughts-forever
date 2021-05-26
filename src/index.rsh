@@ -17,7 +17,7 @@ const Subscriber = {
 
 export const main = Reach.App(
     {},
-    [Participant('Alice', Poster), Participant('Bob', Subscriber)],
+    [Participant('Alice', Poster), ParticipantClass('Bob', Subscriber)],
     (A, B) => {
       
       A.only(() => {
