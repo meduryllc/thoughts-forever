@@ -59,7 +59,7 @@ exports.DeployerOrAttacher = class extends React.Component {
   render() {
     const {parent} = this.props;
     return (
-      <div>
+      <div style={card}>
         Do you want to start or join a stream?
         <br />
         <p>
@@ -80,6 +80,16 @@ exports.DeployerOrAttacher = class extends React.Component {
       </div>
     );
   }
+}
+
+const card = {
+  color: '#000000',
+  backgroundColor: '#FFFFFF',
+  borderRadius: '10px',
+  marginRight: '10%',
+  marginLeft: '10%',
+  border: '2px solid steelblue',
+  padding: '10px'
 }
 
 export default exports;

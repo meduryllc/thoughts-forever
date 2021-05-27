@@ -21,8 +21,6 @@ code {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -38,26 +36,44 @@ input[type=number] {
 
 input[type=text] {
   border-radius: 10px;
-  width: 4em;
+  width: 50em;
 }
 
 button {
-  font-size: calc(10px + 2vmin);
-  margin-top: 50px;
-  margin-left: 10px;
+  display: inline-block;
+  background:green;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 15px;
+  font-family: inherit;
 }
 
 textarea {
-  font-size: calc(10px + 2vmin);
+  width: 50%;
+  height: 100%;
   border-radius: 10px;
 }
 
 .ContractInfo {
   font-size: calc(10px + 1vmin);
   text-align: left;
-  width: 90vw;
+  width: 60vw;
   height: 7em;
   padding: 2vw;
-  overflow-x: scroll;
+  margin-top: 5%;
   white-space: pre;
+}
+
+.Card {
+ 
+  color: '#000000';
+  background-color: '#FFFFFF';
+  border-radius: '10px';
+  margin-right: '10px';
+  margin-left: '10px';
 }

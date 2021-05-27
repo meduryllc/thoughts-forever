@@ -20,7 +20,7 @@ exports.Attach = class extends React.Component {
     const {parent} = this.props;
     const {ctcInfoStr} = this.state || {};
     return (
-      <div>
+      <div style={card}>
         Please paste the contract info to attach to:
         <br />
         <textarea spellcheck="false"
@@ -42,7 +42,7 @@ exports.Attaching = class extends React.Component {
   render() {
     const {streamName} = this.props;
     return (
-      <div>
+      <div style={card}>
         Subscribing to {streamName}
       </div>
     );
@@ -53,7 +53,7 @@ exports.ViewStreamName = class extends React.Component {
   render() {
     const {parent, streamName} = this.props;
     return (
-      <div>
+      <div style={card}>
         Do you want to subscribe to: <strong>{streamName}</strong>?
         <br/>
          <button
@@ -76,15 +76,15 @@ exports.ViewPost = class extends React.Component {
   render() {
     const {parent, posts} = this.props;
     return (
-      <div>
-        They posted: <br/> <br/>
-        <ul>
-          <strong>
+      <div >
+        Posts: <br/> <br/>
+        
+          
             {posts.map(post => {
-              return <li>{post}</li>
+              return <div style={card}>{post}</div>
             })}
-          </strong>
-        </ul>
+          
+        
       </div>
     );
   }
@@ -93,12 +93,24 @@ exports.ViewPost = class extends React.Component {
 exports.WaitingForTurn = class extends React.Component {
   render() {
     return (
-      <div>
+      <div >
         Waiting for posts...
         <br />
       </div>
     );
   }
+}
+
+const card = {
+  marginTop: '20px',
+  color: '#000000',
+  backgroundColor: '#FFFFFF',
+  borderRadius: '10px',
+  marginRight: '10%',
+  marginLeft: '10%',
+  border: '2px solid steelblue',
+  padding: '10px',
+  
 }
 
 export default exports;

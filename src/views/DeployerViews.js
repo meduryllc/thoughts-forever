@@ -10,7 +10,6 @@ exports.Wrapper = class extends React.Component {
     const {content} = this.props;
     return (
       <div className="Deployer">
-        
         {content}
       </div>
     );
@@ -22,8 +21,8 @@ exports.CreateStream = class extends React.Component {
     const {parent, defaultStream} = this.props;
     const streamName = (this.state || {}).streamName || defaultStream
     return (
-      <div>
-        <h2>Create Stream</h2>
+      <div style={card}>
+        <h2>Create a new Stream</h2>
         <input
           type='text'
           style={{height: "30px", width: "400px"}}
@@ -44,7 +43,7 @@ exports.Deploy = class extends React.Component {
   render() {
     const {parent, streamName} = this.props;
     return (
-      <div>
+      <div style={card}>
         Creating Stream: <strong>{streamName}</strong>
         <br />
         <button
@@ -78,7 +77,7 @@ exports.WaitingForAttacher = class extends React.Component {
   render() {
     const {ctcInfoStr} = this.props;
     return (
-      <div>
+      <div style={card}>
         Waiting for Subscribers 
         <br /> Please give them this contract info:
         <pre className='ContractInfo'>
@@ -98,17 +97,19 @@ exports.PostThought = class extends React.Component {
     const streamName = (this.state || {}).streamName || defaultStream;
     const thought = (this.state || {}).thought;
     return (
-      <div>
-        <h2>Create Posts</h2>
+      <div style={card}>
+        <h2>Post Something</h2>
         <textarea
-          placeholder='Enter your thoughts here'
+          rows={6}
+          cols={20}
+          placeholder='...'
           onChange={(e) => this.setState({thought: e.currentTarget.value})}
         /> 
         <br />
         <button
          
           onClick={() => parent.postThought(thought)}
-        >Create</button>
+        >Post</button>
       </div>
     );
   }
@@ -118,7 +119,7 @@ exports.SeePost = class extends React.Component {
   render() {
     const {parent, thought} = this.props;
     return (
-      <div>
+      <div style={card}>
         You just posted: 
         <h3><strong>{thought}</strong></h3>
          
@@ -131,7 +132,7 @@ exports.ContinueOrStop = class extends React.Component {
   render() {
     const {parent, thought} = this.props;
     return (
-      <div>
+      <div style={card}>
           Do you want to continue or stop posting?
           <br/>
          <button
@@ -149,6 +150,15 @@ exports.ContinueOrStop = class extends React.Component {
   }
 }
 
+const card = {
+  color: '#000000',
+  backgroundColor: '#FFFFFF',
+  borderRadius: '10px',
+  marginRight: '10%',
+  marginLeft: '10%',
+  border: '2px solid steelblue',
+  padding: '10px'
+}
 
 
 export default exports;
