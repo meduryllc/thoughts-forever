@@ -133,6 +133,7 @@ exports.ContinueOrStop = class extends React.Component {
     return (
       <div>
           Do you want to continue or stop posting?
+          <br/>
          <button
           onClick={() => {
             parent.continue('Continue');

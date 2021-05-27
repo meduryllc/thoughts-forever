@@ -8,7 +8,7 @@ exports.Wrapper = class extends React.Component {
     const {content} = this.props;
     return (
       <div className="Attacher">
-        <h2>Read Posts</h2>
+        
         {content}
       </div>
     );
@@ -55,6 +55,7 @@ exports.ViewStreamName = class extends React.Component {
     return (
       <div>
         Do you want to subscribe to: <strong>{streamName}</strong>?
+        <br/>
          <button
           onClick={() => {
             parent.subscribe('Yes');
@@ -76,7 +77,14 @@ exports.ViewPost = class extends React.Component {
     const {parent, posts} = this.props;
     return (
       <div>
-        They posted: <strong>{posts}</strong>
+        They posted: <br/> <br/>
+        <ul>
+          <strong>
+            {posts.map(post => {
+              return <li>{post}</li>
+            })}
+          </strong>
+        </ul>
       </div>
     );
   }
