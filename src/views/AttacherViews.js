@@ -23,7 +23,7 @@ exports.Attach = class extends React.Component {
       <div style={card}>
         Please paste the contract info of a stream:
         <br />
-        <textarea spellcheck="false"
+        <textarea spellCheck="false"
           className='ContractInfo'
           onChange={(e) => this.setState({ctcInfoStr: e.currentTarget.value})}
           placeholder='{}'
@@ -82,7 +82,7 @@ exports.ViewPost = class extends React.Component {
     today=months[month]+' '+today.getDate();
     return (
       <div >
-        Posts: <br/> <br/>
+        <p style={{fontSize:'20px', textAlign:'left', marginLeft:'35%'}}>Posts:</p>
         
           
             {posts.map(post => {
@@ -143,7 +143,8 @@ const card_attach = {
 
 const tweet = {
   ...card_attach,
-  textAlign: 'left'
+  textAlign: 'left',
+  marginTop: '2%'
 }
 
 export default exports;

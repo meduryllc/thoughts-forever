@@ -22,7 +22,7 @@ exports.CreateStream = class extends React.Component {
     const streamName = (this.state || {}).streamName || defaultStream;
     
     return (
-      
+     
       <div style={card_deploy}>
         <h2>New Stream</h2>
         <input
@@ -37,15 +37,30 @@ exports.CreateStream = class extends React.Component {
           onClick={() => parent.setStreamName(streamName)}
         >Create</button>
       </div>
-      
-     /*
-     <div style={tweet}>
+      /*
+     <div>
+       <div style={tweet}>
        
-       <span style={{fontSize: '20px', display:'inline'}}><img style={{width: '10%', height:'20%', display:'inline', verticalAlign:'top'}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/768px-User_icon_2.svg.png"/><strong>Alice</strong></span><p style={{color:'grey', fontSize:'20px', marginLeft:'1%', display:'inline'}}>@alice | May 28</p>
-       
+        <span style={{fontSize: '20px', display:'inline'}}><img style={{width: '10%', height:'20%', display:'inline', verticalAlign:'top'}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/768px-User_icon_2.svg.png"/><strong>Alice</strong></span><p style={{color:'grey', fontSize:'20px', marginLeft:'1%', display:'inline'}}>@alice | May 28</p>
+        
         <p style={{fontSize: '20px', marginLeft: '10%'}}>This is my first post</p>
+          
       </div>
-      */
+      <div style={{marginTop:'5%'}}>
+        <p style={{fontSize:'20px', textAlign:'left', marginLeft:'35%'}}>New Post:</p>
+        <textarea style={{width:'31vw', marginLeft:'1%'}}
+          rows={6}
+          cols={6}
+          placeholder='...'
+          onChange={(e) => this.setState({thought: e.currentTarget.value})}
+        /> 
+        <br />
+      </div>
+      
+      
+     </div>
+     */
+      
     );
   }
 }
@@ -104,19 +119,45 @@ exports.WaitingForAttacher = class extends React.Component {
 
 exports.PostThought = class extends React.Component {
   render() {
-    const {parent, defaultStream} = this.props;
+    const {parent, defaultStream, posts} = this.props;
     const streamName = (this.state || {}).streamName || defaultStream;
     const thought = (this.state || {}).thought;
+    var today = new Date();
+    var month = parseInt(today.getMonth() + 1);
+    var months = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    today=months[month]+' '+today.getDate();
+    var printPosts='';
+    if(posts.length!=0) printPosts='My Posts';
     return (
-      <div style={card_deploy}>
-        <h2>Post Something</h2>
-        <textarea
-          rows={6}
-          cols={20}
-          placeholder='...'
-          onChange={(e) => this.setState({thought: e.currentTarget.value})}
-        /> 
-        <br />
+      <div >
+        <p style={{fontSize:'20px', textAlign:'left', marginLeft:'35%'}}>{printPosts}</p>
+        {posts.map(post => {
+          return (
+            /*
+            <div style={card_attach}>
+              <p style={{size: '10px'}}>{post}</p>
+            </div>
+            */
+            <div style={tweet}>
+    
+            <span style={{fontSize: '20px', display:'inline'}}><img style={{width: '10%', height:'20%', display:'inline', verticalAlign:'top'}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/768px-User_icon_2.svg.png"/><strong>Alice</strong></span><p style={{color:'grey', fontSize:'20px', marginLeft:'1%', display:'inline'}}>@alice | {today}</p>
+            
+              <p style={{fontSize: '20px', marginLeft: '10%'}}>{post}</p>
+            </div>
+          )
+        })}
+        
+        <div style={{marginTop:'5%'}}>
+          <p style={{fontSize:'20px', textAlign:'left', marginLeft:'35%'}}>New Post:</p>
+          <textarea style={{width:'31vw', marginLeft:'1%'}}
+            rows={6}
+            cols={6}
+            placeholder='...'
+            onChange={(e) => this.setState({thought: e.currentTarget.value})}
+          /> 
+          <br />
+        </div>
+      
         <button
          
           onClick={() => parent.postThought(thought)}

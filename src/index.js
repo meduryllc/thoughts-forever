@@ -44,7 +44,7 @@ class App extends React.Component {
 class Poster extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {view: 'CreateStream'};
+    this.state = {view: 'CreateStream', posts: []};
   }
   async setStreamName(streamName){
     this.setState({view: 'Deploy', streamName});
@@ -55,15 +55,15 @@ class Poster extends React.Component {
 
   async post(){
     const thought = await new Promise(resolvePostedP => {
-      this.setState({view: 'PostThought', resolvePostedP});
+      this.setState({view: 'PostThought', posts: this.state.posts, resolvePostedP});
     });
-    this.setState({view: 'SeePost', thought});
+    this.setState({view: 'SeePost', posts: [...this.state.posts, thought], thought});
     return thought;
   }
 
   async continueStream(){
     const decision = await new Promise(resolveContinueP => {
-      this.setState({view: 'ContinueOrStop', resolveContinueP});
+      this.setState({view: 'ContinueOrStop',  resolveContinueP});
     });
     return decision;
   }
