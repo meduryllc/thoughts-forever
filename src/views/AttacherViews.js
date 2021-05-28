@@ -21,7 +21,7 @@ exports.Attach = class extends React.Component {
     const {ctcInfoStr} = this.state || {};
     return (
       <div style={card}>
-        Please paste the contract info to attach to:
+        Please paste the contract info of a stream:
         <br />
         <textarea spellcheck="false"
           className='ContractInfo'
@@ -43,7 +43,7 @@ exports.Attaching = class extends React.Component {
     const {streamName} = this.props;
     return (
       <div style={card}>
-        Subscribing to {streamName}
+        Subscribing {streamName}
       </div>
     );
   }
@@ -53,15 +53,16 @@ exports.ViewStreamName = class extends React.Component {
   render() {
     const {parent, streamName} = this.props;
     return (
-      <div style={card}>
-        Do you want to subscribe to: <strong>{streamName}</strong>?
+      <div style={card_attach}>
+        Subscribing to: <strong>{streamName}</strong>?
         <br/>
          <button
           onClick={() => {
             parent.subscribe('Yes');
           }}
-        >Yes</button>
+        >Confirm</button>
         <button
+          style={{backgroundColor: 'red'}}
           onClick={() => {
             parent.subscribe('No');
           }}
@@ -75,13 +76,29 @@ exports.ViewStreamName = class extends React.Component {
 exports.ViewPost = class extends React.Component {
   render() {
     const {parent, posts} = this.props;
+    var today = new Date();
+    var month = parseInt(today.getMonth() + 1);
+    var months = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    today=months[month]+' '+today.getDate();
     return (
       <div >
         Posts: <br/> <br/>
         
           
             {posts.map(post => {
-              return <div style={card}>{post}</div>
+              return (
+                /*
+                <div style={card_attach}>
+                  <p style={{size: '10px'}}>{post}</p>
+                </div>
+                */
+                <div style={tweet}>
+       
+                <span style={{fontSize: '20px', display:'inline'}}><img style={{width: '10%', height:'20%', display:'inline', verticalAlign:'top'}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/768px-User_icon_2.svg.png"/><strong>Alice</strong></span><p style={{color:'grey', fontSize:'20px', marginLeft:'1%', display:'inline'}}>@alice | {today}</p>
+                
+                  <p style={{fontSize: '20px', marginLeft: '10%'}}>{post}</p>
+                </div>
+              )
             })}
           
         
@@ -105,12 +122,28 @@ const card = {
   marginTop: '20px',
   color: '#000000',
   backgroundColor: '#FFFFFF',
+  
   borderRadius: '10px',
   marginRight: '10%',
   marginLeft: '10%',
   border: '2px solid steelblue',
   padding: '10px',
   
+}
+
+const card_attach = {
+  color: '#000000',
+  backgroundColor: '#FFFFFF',
+  borderRadius: '10px',
+  width: '30vw',
+  marginLeft: '35%',
+  border: '2px solid steelblue',
+  padding: '10px'
+}
+
+const tweet = {
+  ...card_attach,
+  textAlign: 'left'
 }
 
 export default exports;

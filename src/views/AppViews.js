@@ -60,7 +60,7 @@ exports.DeployerOrAttacher = class extends React.Component {
     const {parent} = this.props;
     return (
       <div style={card}>
-        Do you want to start or join a stream?
+        Start or Join a stream:
         <br />
         <p>
           <button
@@ -86,8 +86,8 @@ const card = {
   color: '#000000',
   backgroundColor: '#FFFFFF',
   borderRadius: '10px',
-  marginRight: '10%',
-  marginLeft: '10%',
+  width: '30vw',
+  marginLeft: '35%',
   border: '2px solid steelblue',
   padding: '10px'
 }

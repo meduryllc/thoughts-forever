@@ -106,14 +106,6 @@ class Subscriber extends React.Component {
     return true;
   }
   
-  /*
-  async acceptWager(wagerAtomic) { // Fun([UInt], Null)
-    const wager = reach.formatCurrency(wagerAtomic, 4);
-    return await new Promise(resolveAcceptedP => {
-      this.setState({view: 'AcceptTerms', wager, resolveAcceptedP});
-    });
-  }
-  */
   async seeMessage(post){
     
     this.setState({view: 'ViewPost', posts: [...this.state.posts, post]});
@@ -129,10 +121,7 @@ class Subscriber extends React.Component {
       this.setState({view: 'Attach'});
     }
   }
-  termsAccepted() {
-    this.state.resolveAcceptedP();
-    this.setState({view: 'WaitingForTurn'});
-  }
+  
   render() { return renderView(this, AttacherViews); }
 }
 

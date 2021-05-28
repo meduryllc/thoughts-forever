@@ -19,10 +19,12 @@ exports.Wrapper = class extends React.Component {
 exports.CreateStream = class extends React.Component {
   render() {
     const {parent, defaultStream} = this.props;
-    const streamName = (this.state || {}).streamName || defaultStream
+    const streamName = (this.state || {}).streamName || defaultStream;
+    
     return (
-      <div style={card}>
-        <h2>Create a new Stream</h2>
+      
+      <div style={card_deploy}>
+        <h2>New Stream</h2>
         <input
           type='text'
           style={{height: "30px", width: "400px"}}
@@ -35,6 +37,15 @@ exports.CreateStream = class extends React.Component {
           onClick={() => parent.setStreamName(streamName)}
         >Create</button>
       </div>
+      
+     /*
+     <div style={tweet}>
+       
+       <span style={{fontSize: '20px', display:'inline'}}><img style={{width: '10%', height:'20%', display:'inline', verticalAlign:'top'}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/768px-User_icon_2.svg.png"/><strong>Alice</strong></span><p style={{color:'grey', fontSize:'20px', marginLeft:'1%', display:'inline'}}>@alice | May 28</p>
+       
+        <p style={{fontSize: '20px', marginLeft: '10%'}}>This is my first post</p>
+      </div>
+      */
     );
   }
 }
@@ -43,7 +54,7 @@ exports.Deploy = class extends React.Component {
   render() {
     const {parent, streamName} = this.props;
     return (
-      <div style={card}>
+      <div style={card_deploy}>
         Creating Stream: <strong>{streamName}</strong>
         <br />
         <button
@@ -78,8 +89,8 @@ exports.WaitingForAttacher = class extends React.Component {
     const {ctcInfoStr} = this.props;
     return (
       <div style={card}>
-        Waiting for Subscribers 
-        <br /> Please give them this contract info:
+        
+        <br /> Subscribers can join by entering the following contract information
         <pre className='ContractInfo'>
           {ctcInfoStr}
         </pre>
@@ -97,7 +108,7 @@ exports.PostThought = class extends React.Component {
     const streamName = (this.state || {}).streamName || defaultStream;
     const thought = (this.state || {}).thought;
     return (
-      <div style={card}>
+      <div style={card_deploy}>
         <h2>Post Something</h2>
         <textarea
           rows={6}
@@ -119,8 +130,8 @@ exports.SeePost = class extends React.Component {
   render() {
     const {parent, thought} = this.props;
     return (
-      <div style={card}>
-        You just posted: 
+      <div style={card_deploy}>
+        Uploading post: 
         <h3><strong>{thought}</strong></h3>
          
       </div>
@@ -132,7 +143,7 @@ exports.ContinueOrStop = class extends React.Component {
   render() {
     const {parent, thought} = this.props;
     return (
-      <div style={card}>
+      <div style={card_deploy}>
           Do you want to continue or stop posting?
           <br/>
          <button
@@ -158,6 +169,23 @@ const card = {
   marginLeft: '10%',
   border: '2px solid steelblue',
   padding: '10px'
+}
+
+const card_deploy = {
+  color: '#000000',
+  backgroundColor: '#FFFFFF',
+  borderRadius: '10px',
+  width: '30vw',
+  marginLeft: '35%',
+  border: '2px solid steelblue',
+  padding: '10px',
+  
+}
+
+const tweet = {
+  ...card_deploy,
+  textAlign: 'left',
+  marginTop:'2%'
 }
 
 
