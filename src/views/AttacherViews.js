@@ -1,5 +1,6 @@
 import React from 'react';
 import PlayerViews from './PlayerViews';
+import loader from './assets/grid.svg'
 
 const exports = {...PlayerViews};
 
@@ -44,6 +45,8 @@ exports.Attaching = class extends React.Component {
     return (
       <div style={card}>
         Subscribing {streamName}
+        <br/>
+        <img src={loader} style={{marginTop: '5%'}}/>
       </div>
     );
   }
@@ -113,6 +116,8 @@ exports.WaitingForTurn = class extends React.Component {
       <div >
         Waiting for posts...
         <br />
+
+        <img src={loader} style={{marginTop: '5%'}}/>
       </div>
     );
   }

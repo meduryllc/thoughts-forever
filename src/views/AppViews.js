@@ -1,4 +1,6 @@
 import React from 'react';
+import logo from './assets/tflogo.png'
+import loader from './assets/grid.svg'
 
 const exports = {};
 
@@ -9,7 +11,7 @@ exports.Wrapper = class extends React.Component {
       <div className="App">
         
         <header className="App-header" id="root">
-          <h1>Thoughts-Forever</h1>
+          <img src={logo} style={{textAlign: 'left', height:'10%', width:'10%', marginLeft:'10%', marginBottom: '2%'}}/>
           {content}
         </header>
         
@@ -22,8 +24,8 @@ exports.ConnectAccount = class extends React.Component {
   render() {
     return (
       <div>
-        Please wait while we connect to your account.
-        If this takes more than a few seconds, there may be something wrong.
+        Please wait while we connect to your account. <br/>
+        <img src={loader}/>
       </div>
     )
   }
@@ -60,17 +62,18 @@ exports.DeployerOrAttacher = class extends React.Component {
     const {parent} = this.props;
     return (
       <div style={card}>
-        Start or Join a stream:
+        <img src={logo}/>
+       
         <br />
         <p>
           <button
             onClick={() => parent.selectCreate()}
             style={{marginRight: "10px"}}
-          >Start</button>
+          >Start a stream</button>
 
           <button
             onClick={() => parent.selectJoin()}
-          >Join</button>
+          >Join a stream</button>
           
         </p>
         <p>

@@ -1,5 +1,6 @@
 import React from 'react';
 import PlayerViews from './PlayerViews';
+import loader from './assets/grid.svg'
 
 const exports = {...PlayerViews};
 
@@ -74,7 +75,7 @@ exports.Deploy = class extends React.Component {
         <br />
         <button
           onClick={() => parent.deploy()}
-        >Deploy</button>
+        >Create</button>
       </div>
     );
   }
@@ -83,7 +84,8 @@ exports.Deploy = class extends React.Component {
 exports.Deploying = class extends React.Component {
   render() {
     return (
-      <div>Deploying... please wait.</div>
+      <div>Creating your stream... please wait.<br/><img style={{marginTop: '5%'}} src={loader}/></div>
+      
     );
   }
 }
@@ -130,6 +132,20 @@ exports.PostThought = class extends React.Component {
     if(posts.length!=0) printPosts='My Posts';
     return (
       <div >
+        <div>
+          <p style={{fontSize:'20px', textAlign:'left', marginLeft:'35%'}}>New Post:</p>
+          <textarea style={{width:'31vw', marginLeft:'1%'}}
+            rows={6}
+            cols={6}
+            placeholder='...'
+            onChange={(e) => this.setState({thought: e.currentTarget.value})}
+          /> 
+          <br />
+        </div>
+        <button
+          onClick={() => parent.postThought(thought)}
+        >Post</button>
+
         <p style={{fontSize:'20px', textAlign:'left', marginLeft:'35%'}}>{printPosts}</p>
         {posts.map(post => {
           return (
@@ -147,21 +163,9 @@ exports.PostThought = class extends React.Component {
           )
         })}
         
-        <div style={{marginTop:'5%'}}>
-          <p style={{fontSize:'20px', textAlign:'left', marginLeft:'35%'}}>New Post:</p>
-          <textarea style={{width:'31vw', marginLeft:'1%'}}
-            rows={6}
-            cols={6}
-            placeholder='...'
-            onChange={(e) => this.setState({thought: e.currentTarget.value})}
-          /> 
-          <br />
-        </div>
+        
       
-        <button
-         
-          onClick={() => parent.postThought(thought)}
-        >Post</button>
+        
       </div>
     );
   }
@@ -169,11 +173,12 @@ exports.PostThought = class extends React.Component {
 
 exports.SeePost = class extends React.Component {
   render() {
-    const {parent, thought} = this.props;
+    
     return (
-      <div style={card_deploy}>
-        Uploading post: 
-        <h3><strong>{thought}</strong></h3>
+      <div >
+        Uploading your post.... please wait.
+        <br/>
+        <img src={loader} style={{marginTop: '5%'}}/>
          
       </div>
     );
