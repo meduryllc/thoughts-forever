@@ -14,7 +14,7 @@ const defaults = {defaultFundAmt: '10', defaultStream: 'Reach is Fun', standardU
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {view: 'ConnectAccount', ...defaults};
+    this.state = {view: 'ConnectAccount', ...defaults, home: true};
   }
   async componentDidMount() {
     const acc = await reach.getDefaultAccount();
@@ -31,33 +31,45 @@ class App extends React.Component {
       this.setState({view: 'DeployerOrAttacher'});
     }
   }
+  
   async fundAccount(fundAmount) {
     await reach.transfer(this.state.faucet, this.state.acc, reach.parseCurrency(fundAmount));
     this.setState({view: 'DeployerOrAttacher'});
   }
-  async skipFundAccount() { this.setState({view: 'DeployerOrAttacher'}); }
-  selectJoin() { this.setState({view: 'Wrapper', ContentView: Subscriber}); }
-  selectCreate() { this.setState({view: 'Wrapper', ContentView: Poster}); }
+  async skipFundAccount() { this.setState({view: 'DeployerOrAttacher', home: true}); }
+  //selectJoin() { this.setState({home:false, poster: true, subscriber: false, view: 'Wrapper', ContentView: Subscriber}); }
+  selectJoin() {this.setState({home:false, poster: false, subscriber: true, view: 'Wrapper', ContentView: Subscriber});}
+  selectCreate() { this.setState({home:false, subscriber: false, poster:true, view: 'Wrapper', ContentView: Poster}); }
+  
   render() { return renderView(this, AppViews); }
 }
 
 class Poster extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {view: 'CreateStream', posts: []};
+    
+    this.state = {view: 'CreateStream', posts: [], subscriberPosts: []}; 
   }
+  
   async setStreamName(streamName){
     this.setState({view: 'Deploy', streamName});
   }
   async createStream() { 
     return this.state.streamName; 
   }
-
+  
+  selectJoin() {
+    if(!this.state.subscriber) this.setState({home:false, poster: false, subscriber: true, view: 'Wrapper', ContentView: Subscriber});
+    else {this.setState({home:false, poster: false, subscriber: true, sawPost:true, view: 'Wrapper', ContentView: Subscriber})}
+  }
+  selectCreate() { console.log(this.state); this.setState({view: 'PostThought'}); }
   async post(){
+    
     const thought = await new Promise(resolvePostedP => {
       this.setState({view: 'PostThought', posts: this.state.posts, resolvePostedP});
     });
     this.setState({view: 'SeePost', posts: [...this.state.posts, thought], thought});
+    
     return thought;
   }
 
@@ -79,7 +91,6 @@ class Poster extends React.Component {
   async deploy() {
     const ctc = this.props.acc.deploy(backend);
     this.setState({view: 'Deploying', ctc});
-    //this.wager = reach.parseCurrency(this.state.wager); // UInt
     
     backend.Alice(ctc, this);
     const ctcInfoStr = JSON.stringify(await ctc.getInfo(), null, 2);
@@ -92,13 +103,16 @@ class Poster extends React.Component {
 class Subscriber extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {view: 'Attach', posts: []};
+    console.log(props);
+    if(props.sawPost) {this.state = {view: 'ViewPost', alreadyViewed: true, posts: props.subscriberPosts}}
+    else {this.state = {view: 'Attach', posts: []}};
   }
   attach(ctcInfoStr) {
     const ctc = this.props.acc.attach(backend, JSON.parse(ctcInfoStr));
     this.setState({view: 'Attaching'});
     backend.Bob(ctc, this);
   }
+  
   async seeStream(streamName){
     await new Promise(resolveAcceptedP => {
       this.setState({view: 'ViewStreamName', streamName, resolveAcceptedP});
@@ -107,8 +121,9 @@ class Subscriber extends React.Component {
   }
   
   async seeMessage(post){
+    this.props.parent.setState({subscriberPosts: [...this.props.parent.state.subscriberPosts, post]});
     
-    this.setState({view: 'ViewPost', posts: [...this.state.posts, post]});
+    this.setState({view: 'ViewPost', alreadyViewed:false, posts: [...this.state.posts, post]});
   }
 
   subscribe(yesOrNo) {

@@ -11,6 +11,7 @@ export function renderDOM(app) {
 export function renderView(parent, Views) {
   parent.state = parent.state || {};
   const {view, ContentView} = parent.state;
+  
   const View = view === 'Wrapper'
     ? ContentView
     : Views[view];

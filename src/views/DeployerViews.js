@@ -6,11 +6,20 @@ const exports = {...PlayerViews};
 
 const sleep = (milliseconds) => new Promise(resolve => setTimeout(resolve, milliseconds));
 
+/*
+<button style={nav_buttons} onClick={() => parent.post()}>Post</button>
+<button style={nav_buttons} onClick={() => parent.selectJoin()}>Streams</button>
+*/
+
 exports.Wrapper = class extends React.Component {
   render() {
     const {content} = this.props;
+    const parent = this.props.content.props.parent;
+    
     return (
-      <div className="Deployer">
+      <div className="Deployer" style={{display:'inline-block', float:'left', width:'100%'}}>
+        <button style={nav_buttons} onClick={() => parent.selectCreate()}>Post</button>
+        <button style={nav_buttons} onClick={() => parent.selectJoin()}>Streams</button>
         {content}
       </div>
     );
@@ -130,6 +139,7 @@ exports.PostThought = class extends React.Component {
     today=months[month]+' '+today.getDate();
     var printPosts='';
     if(posts.length!=0) printPosts='My Posts';
+    
     return (
       <div >
         <div>
@@ -154,7 +164,7 @@ exports.PostThought = class extends React.Component {
               <p style={{size: '10px'}}>{post}</p>
             </div>
             */
-            <div style={tweet}>
+            <div key={post} style={tweet}>
     
             <span style={{fontSize: '20px', display:'inline'}}><img style={{width: '10%', height:'20%', display:'inline', verticalAlign:'top'}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/768px-User_icon_2.svg.png"/><strong>Alice</strong></span><p style={{color:'grey', fontSize:'20px', marginLeft:'1%', display:'inline'}}>@alice | {today}</p>
             
@@ -233,6 +243,20 @@ const tweet = {
   textAlign: 'left',
   marginTop:'2%'
 }
+
+const nav_buttons = {
+  border: '2px solid black',
+  borderRadius: '5px',
+  color: 'black',
+  backgroundColor: 'white',
+  marginLeft: '2%',
+  width:'20%',
+  height:'10%',
+  textAlign: 'left',
+  marginTop: '0px',
+  display:'block'
+}
+
 
 
 export default exports;
