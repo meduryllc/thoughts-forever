@@ -88,12 +88,8 @@ exports.DeployerOrAttacher = class extends React.Component {
               <button
                 onClick={() => parent.selectCreate()}
                 style={{marginRight: "10px"}}
-              >Start a stream</button>
+              >Get Started</button>
 
-              <button
-                onClick={() => parent.selectJoin()}
-              >Join a stream</button>
-              
             </p>
             <p>
               

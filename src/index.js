@@ -48,7 +48,7 @@ class Poster extends React.Component {
   constructor(props) {
     super(props);
     
-    this.state = {view: 'CreateStream', posts: [], subscriberPosts: []}; 
+    this.state = {view: 'CreateStream', posts: [], subscriberPosts: [], sawFirstPost: false, createdFirstPost: false}; 
   }
   
   async setStreamName(streamName){
@@ -59,16 +59,18 @@ class Poster extends React.Component {
   }
   
   selectJoin() {
-    if(!this.state.subscriber) this.setState({home:false, poster: false, subscriber: true, view: 'Wrapper', ContentView: Subscriber});
+    if(!this.state.sawFirstPost) this.setState({home:false, poster: false, subscriber: true, view: 'Wrapper', ContentView: Subscriber});
     else {this.setState({home:false, poster: false, subscriber: true, sawPost:true, view: 'Wrapper', ContentView: Subscriber})}
   }
-  selectCreate() { console.log(this.state); this.setState({view: 'PostThought'}); }
+  selectCreate() { 
+    if(this.state.createdFirstPost) this.setState({view: 'PostThought'}); 
+    else this.setState({view: 'CreateStream'});
+  }
   async post(){
-    
     const thought = await new Promise(resolvePostedP => {
       this.setState({view: 'PostThought', posts: this.state.posts, resolvePostedP});
     });
-    this.setState({view: 'SeePost', posts: [...this.state.posts, thought], thought});
+    this.setState({view: 'SeePost', createdFirstPost:true, posts: [...this.state.posts, thought], thought});
     
     return thought;
   }
@@ -103,8 +105,8 @@ class Poster extends React.Component {
 class Subscriber extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
-    if(props.sawPost) {this.state = {view: 'ViewPost', alreadyViewed: true, posts: props.subscriberPosts}}
+    
+    if(props.sawFirstPost) {this.state = {view: 'ViewPost', alreadyViewed: true, posts: props.subscriberPosts}}
     else {this.state = {view: 'Attach', posts: []}};
   }
   attach(ctcInfoStr) {
@@ -121,9 +123,9 @@ class Subscriber extends React.Component {
   }
   
   async seeMessage(post){
-    this.props.parent.setState({subscriberPosts: [...this.props.parent.state.subscriberPosts, post]});
-    
-    this.setState({view: 'ViewPost', alreadyViewed:false, posts: [...this.state.posts, post]});
+    this.props.parent.setState({subscriberPosts: [...this.props.parent.state.subscriberPosts, post], sawFirstPost: true});
+    //console.log(this.state.posts.length);
+    await this.setState({view: 'ViewPost', alreadyViewed:false, posts: [...this.state.posts, post]});
   }
 
   subscribe(yesOrNo) {
