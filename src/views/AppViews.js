@@ -22,7 +22,7 @@ exports.Wrapper = class extends React.Component {
         <header className="App-header" id="root" >
           {home ? null : 
             <div style={{textAlign: 'left'}}>
-              <img src={logo} style={{textAlign: 'left', height:'40%', marginLeft: '10%', width:'10%', marginBottom: '2%'}} onClick={() => parent.skipFundAccount()}/>
+              <img src={logo} style={{textAlign: 'left', height:'70%', marginLeft: '10%', width:'10%', marginBottom: '2%'}} onClick={() => parent.skipFundAccount()}/>
               
              
             </div>

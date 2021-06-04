@@ -2,7 +2,12 @@
 
 const [ isStatus, START, STOP ] = makeEnum(2);
 
+const common = {
+  endStream: Fun([], Null)
+}
+
 const Poster = {
+  ...common,
   post: Fun([], Bytes(128)),
   continueStream: Fun([], UInt),
   createStream: Fun([], Bytes(128)),
@@ -10,6 +15,7 @@ const Poster = {
 };
 
 const Subscriber = {
+  ...common,
   subscribe: Fun([],Bool),
   seeMessage: Fun([Bytes(128)], Null),
   seeStream: Fun([Bytes(128)], Bool)
@@ -67,6 +73,9 @@ export const main = Reach.App(
         continue;
       }
       commit();
+
+      each([A, B], () => {interact.endStream()}); 
+
       exit(); 
     
     }

@@ -54,6 +54,7 @@ exports.Attaching = class extends React.Component {
 exports.ViewStreamName = class extends React.Component {
   render() {
     const {parent, streamName} = this.props;
+    
     return (
       <div style={card_attach}>
         Subscribing to: <strong>{streamName}</strong>?
@@ -118,6 +119,17 @@ exports.WaitingForTurn = class extends React.Component {
         <br />
 
         <img src={loader} style={{marginTop: '5%'}}/>
+      </div>
+    );
+  }
+}
+
+exports.EndStream = class extends React.Component {
+  render() {
+    const {parent, thought} = this.props;
+    return (
+      <div style={card_attach}>
+          <h3>Thank you! The stream has stopped. </h3>
       </div>
     );
   }

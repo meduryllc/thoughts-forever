@@ -15,12 +15,17 @@ exports.Wrapper = class extends React.Component {
   render() {
     const {content} = this.props;
     const parent = this.props.content.props.parent;
-    
+    /* <hr style={{color: 'white', width: '80%', marginBottom: '3%'}}/> */
     return (
-      <div className="Deployer" style={{display:'inline-block', float:'left', width:'100%'}}>
-        <button style={nav_buttons} onClick={() => parent.selectCreate()}>Post</button>
-        <button style={nav_buttons} onClick={() => parent.selectJoin()}>Streams</button>
+      <div className="Deployer" style={{display:'inline', float:'left', width:'100%'}}>
+        <div style={{marginLeft: '2%', width:'100%'}}>
+          <button style={nav_buttons} onClick={() => parent.selectCreate()}>New Stream</button> 
+          <button style={nav_buttons} onClick={() => parent.selectView()}>View Posts</button>
+          <button style={nav_buttons} onClick={() => parent.selectJoin()}>Join Stream</button>
+        </div>
+        
         {content}
+        
       </div>
     );
   }
@@ -113,6 +118,7 @@ exports.WaitingForAttacher = class extends React.Component {
 
   render() {
     const {ctcInfoStr} = this.props;
+    console.log(this.props);
     return (
       <div style={card}>
         
@@ -195,6 +201,8 @@ exports.SeePost = class extends React.Component {
   }
 }
 
+
+
 exports.ContinueOrStop = class extends React.Component {
   render() {
     const {parent, thought} = this.props;
@@ -216,6 +224,18 @@ exports.ContinueOrStop = class extends React.Component {
     );
   }
 }
+
+exports.EndStream = class extends React.Component {
+  render() {
+    const {parent, thought} = this.props;
+    return (
+      <div style={card_deploy}>
+          <h3>Thank you! The stream has stopped. </h3>
+      </div>
+    );
+  }
+}
+
 
 const card = {
   color: '#000000',
@@ -249,12 +269,8 @@ const nav_buttons = {
   borderRadius: '5px',
   color: 'black',
   backgroundColor: 'white',
-  marginLeft: '2%',
-  width:'20%',
-  height:'10%',
-  textAlign: 'left',
-  marginTop: '0px',
-  display:'block'
+  textAlign: 'center'
+  
 }
 
 

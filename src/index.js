@@ -14,9 +14,15 @@ const defaults = {defaultFundAmt: '10', defaultStream: 'Reach is Fun', standardU
 class App extends React.Component {
   constructor(props) {
     super(props);
+    
     this.state = {view: 'ConnectAccount', ...defaults, home: true};
   }
   async componentDidMount() {
+    //Uncomment the following lines to run on Algorand Testnet with AlgoSigner
+    /*
+    await reach.setProviderByName('TestNet');
+    await reach.setSignStrategy('AlgoSigner');
+    */
     const acc = await reach.getDefaultAccount();
     const balAtomic = await reach.balanceOf(acc);
     
@@ -44,7 +50,14 @@ class App extends React.Component {
   render() { return renderView(this, AppViews); }
 }
 
-class Poster extends React.Component {
+class User extends React.Component {
+  async endStream(){
+    this.setState({createdFirstPost: false, sawFirstPost:false, view: 'EndStream'});
+  }
+}
+
+
+class Poster extends User {
   constructor(props) {
     super(props);
     
@@ -57,10 +70,14 @@ class Poster extends React.Component {
   async createStream() { 
     return this.state.streamName; 
   }
-  
+
   selectJoin() {
+    this.setState({home:false, poster: false, joinStream: true, subscriber: true, view: 'Wrapper', ContentView: Subscriber});
+  }
+  
+  selectView() {
     if(!this.state.sawFirstPost) this.setState({home:false, poster: false, subscriber: true, view: 'Wrapper', ContentView: Subscriber});
-    else {this.setState({home:false, poster: false, subscriber: true, sawPost:true, view: 'Wrapper', ContentView: Subscriber})}
+    else {this.setState({home:false, poster: false, joinStream:false, subscriber: true, sawPost:true, view: 'Wrapper', ContentView: Subscriber})}
   }
   selectCreate() { 
     if(this.state.createdFirstPost) this.setState({view: 'PostThought'}); 
@@ -99,14 +116,17 @@ class Poster extends React.Component {
     this.setState({view: 'WaitingForAttacher', ctcInfoStr});
     
   }
+
+  //TODO: Fix this to a new layout for seeing end of stream
+  
   render() { return renderView(this, DeployerViews); }
 }
 
-class Subscriber extends React.Component {
+class Subscriber extends User {
   constructor(props) {
     super(props);
     
-    if(props.sawFirstPost) {this.state = {view: 'ViewPost', alreadyViewed: true, posts: props.subscriberPosts}}
+    if(props.sawFirstPost && !props.joinStream) {this.state = {view: 'ViewPost', alreadyViewed: true, posts: props.subscriberPosts}}
     else {this.state = {view: 'Attach', posts: []}};
   }
   attach(ctcInfoStr) {
@@ -138,6 +158,8 @@ class Subscriber extends React.Component {
       this.setState({view: 'Attach'});
     }
   }
+
+  //TODO: Fix this to a new layout for seeing end of stream
   
   render() { return renderView(this, AttacherViews); }
 }
