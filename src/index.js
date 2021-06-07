@@ -55,14 +55,24 @@ class User extends React.Component {
   async endStream(){
     this.setState({createdFirstPost: false, sawFirstPost:false, view: 'EndStream'});
   }
+  
 }
 
 
 class Poster extends User {
   constructor(props) {
     super(props);
-    
-    this.state = {view: 'CreateStream', posts: [], subscriberPosts: [], sawFirstPost: false, createdFirstPost: false}; 
+
+    const active = {
+      display:'inline', 
+      border:'2px solid steelblue', 
+      borderRadius: '5px', 
+      padding: '10px'
+    }
+
+    const inactive = {display: 'inline'}
+
+    this.state = {view: 'CreateStream',posts: [], subscriberPosts: [], sawFirstPost: false, createdFirstPost: false}; 
   }
   
   async setStreamName(streamName){
@@ -126,7 +136,7 @@ class Poster extends User {
 class Subscriber extends User {
   constructor(props) {
     super(props);
-    
+
     if(props.sawFirstPost && !props.joinStream) {this.state = {view: 'ViewPost', alreadyViewed: true, posts: props.subscriberPosts}}
     else {this.state = {view: 'Attach', posts: []}};
   }

@@ -21,7 +21,7 @@ exports.Attach = class extends React.Component {
     const {ctcInfoStr} = this.state || {};
     return (
       <div style={card}>
-        Please paste the contract info of a stream:
+        Please paste the contract info to join a stream:
         <br />
         <textarea spellCheck="false"
           className='ContractInfo'

@@ -10,41 +10,51 @@ const exports = {...PlayerViews};
 
 const sleep = (milliseconds) => new Promise(resolve => setTimeout(resolve, milliseconds));
 
-/*
-<button style={nav_buttons} onClick={() => parent.post()}>Post</button>
-<button style={nav_buttons} onClick={() => parent.selectJoin()}>Streams</button>
-*/
-
 exports.Wrapper = class extends React.Component {
   render() {
-    const {content} = this.props;
+    const {content } = this.props;
     const parent = this.props.content.props.parent;
-    const view = this.props.content.props.view;
-    let posterClass, subscriberClass;
-    if(view == 'Wrapper') {
-      posterClass = 'normal';
-      subscriberClass= 'active';
-    }
-    else if(view == 'CreateStream') {
-      posterClass = 'active';
-      subscriberClass= 'normal';
-    }
-    /* <hr style={{color: 'white', width: '80%', marginBottom: '3%'}}/> */
 
-          // <button onClick={() => parent.selectCreate()}>New Stream</button> 
-          // <button onClick={() => parent.selectView()}>View Posts</button>
-          // <button onClick={() => parent.selectJoin()}>Join Stream</button>
+    const active = {
+      display:'inline', 
+      border:'2px solid steelblue', 
+      borderRadius: '5px', 
+      padding: '10px',
+      marginLeft: '2%'
+    }
+
+    const inactive = {display: 'inline'}
+
+    const posterStyle = (this.state || {}).posterStyle || active;
+    const subscriberStyle = (this.state || {}).subscriberStyle || inactive;
+    const joinStyle = (this.state || {}).joinStyle || inactive;
+    
+    const poster = () => {
+      this.setState({posterStyle:active, subscriberStyle:inactive, joinStyle:inactive})
+      parent.selectCreate();
+    }
+
+    const subscriber = () => {
+      this.setState({posterStyle:inactive, subscriberStyle:active, joinStyle:inactive});
+      parent.selectView();
+    }
+
+    const joinNewStream = () => {
+      this.setState({posterStyle:inactive, subscriberStyle:inactive, joinStyle:active});
+      parent.selectJoin();
+    }
+   
     return (
       <div className="Deployer" style={{display:'inline', float:'left', width:'100%'}}>
         <div style={buttons}>
-          <div style={active} onClick={() => parent.selectCreate()}>
-            <img src={post} style={{width:'2%', height:'1%', verticalAlign:'top'}}/> <p style={{display:'inline', fontSize:'60%'}}>Post Thoughts</p>
+          <div style={posterStyle} onClick={() => poster()}>
+            <img src={post} style={image_style}/> <p style={{display:'inline', fontSize:'60%'}}>Post Thoughts</p>
           </div>
-          <div style={{display:'inline'}} onClick={() => parent.selectView()}>
-            <img src={read} style={{width:'2%', height:'1%', verticalAlign:'top', marginLeft:'20px'}}/> <p style={{display:'inline', fontSize:'60%'}}>Read Thoughts</p>
+          <div style={subscriberStyle} onClick={() => subscriber() }>
+            <img src={read} style={image_style}/> <p style={{display:'inline', fontSize:'60%'}}>Read Thoughts</p>
           </div>
-          <div style={{display:'inline'}} onClick={() => parent.selectJoin()}>
-            <img src={join} style={{width:'2%', height:'1%', verticalAlign:'top', marginLeft:'20px'}}/> <p style={{display:'inline', fontSize:'60%'}}>Join Stream</p>
+          <div style={joinStyle} onClick={() => joinNewStream()}>
+            <img src={join} style={image_style}/> <p style={{display:'inline', fontSize:'60%'}}>Join Stream</p>
           </div>
         </div>
         
@@ -336,12 +346,7 @@ const buttons = {
   marginTop: '5px'
 }
 
-const active = {
-  display:'inline', 
-  border:'2px solid steelblue', 
-  borderRadius: '5px', 
-  padding: '10px'
-}
+const image_style = {width:'2%', height:'1%', verticalAlign:'top', marginLeft:'20px'}
 
 
 export default exports;
