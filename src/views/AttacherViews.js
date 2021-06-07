@@ -86,7 +86,7 @@ exports.ViewPost = class extends React.Component {
     today=months[month]+' '+today.getDate();
     return (
       <div >
-        <p style={{fontSize:'20px', textAlign:'left', marginLeft:'35%'}}>Posts:</p>
+        <p style={{fontSize:'20px', textAlign:'left', marginLeft:'35%'}}>Thoughts so far:</p>
         
           
             {posts.map(post => {
@@ -115,7 +115,7 @@ exports.WaitingForTurn = class extends React.Component {
   render() {
     return (
       <div >
-        Waiting for posts...
+        Please wait while we retrieve thoughts....
         <br />
 
         <img src={loader} style={{marginTop: '5%'}}/>

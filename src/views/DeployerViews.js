@@ -208,12 +208,12 @@ exports.PostThought = class extends React.Component {
     var months = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     today=months[month]+' '+today.getDate();
     var printPosts='';
-    if(posts.length!=0) printPosts='My Posts';
+    if(posts.length!=0) printPosts='Thoughts so far:';
     
     return (
       <div >
         <div>
-          <p style={{fontSize:'20px', textAlign:'left', marginLeft:'35%'}}>New Post:</p>
+          <p style={{fontSize:'20px', textAlign:'left', marginLeft:'35%'}}>New Thoughts:</p>
           <textarea style={{width:'31vw', marginLeft:'1%'}}
             rows={6}
             cols={6}
@@ -258,7 +258,7 @@ exports.SeePost = class extends React.Component {
     
     return (
       <div >
-        Uploading your post.... please wait.
+        Uploading your thought.... please wait.
         <br/>
         <img src={loader} style={{marginTop: '5%'}}/>
          
