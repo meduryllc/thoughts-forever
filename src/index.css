@@ -61,7 +61,7 @@ textarea {
 .ContractInfo {
   font-size: calc(10px + 1vmin);
   text-align: left;
-  width: 60vw;
+  
   height: 7em;
   padding: 2vw;
   margin-top: 5%;
@@ -74,4 +74,11 @@ textarea {
   border-radius: '10px';
   margin-right: '10px';
   margin-left: '10px';
+}
+
+.Active {
+  display:'inline';
+  border:'2px solid steelblue';
+  border-radius: '5px';
+  padding: '10px';
 }

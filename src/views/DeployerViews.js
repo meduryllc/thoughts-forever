@@ -1,6 +1,10 @@
 import React from 'react';
 import PlayerViews from './PlayerViews';
 import loader from './assets/grid.svg'
+import read from './assets/readIcon.png'
+import post from './assets/postIcon.png'
+import join from './assets/joinIcon.png'
+
 
 const exports = {...PlayerViews};
 
@@ -15,13 +19,33 @@ exports.Wrapper = class extends React.Component {
   render() {
     const {content} = this.props;
     const parent = this.props.content.props.parent;
+    const view = this.props.content.props.view;
+    let posterClass, subscriberClass;
+    if(view == 'Wrapper') {
+      posterClass = 'normal';
+      subscriberClass= 'active';
+    }
+    else if(view == 'CreateStream') {
+      posterClass = 'active';
+      subscriberClass= 'normal';
+    }
     /* <hr style={{color: 'white', width: '80%', marginBottom: '3%'}}/> */
+
+          // <button onClick={() => parent.selectCreate()}>New Stream</button> 
+          // <button onClick={() => parent.selectView()}>View Posts</button>
+          // <button onClick={() => parent.selectJoin()}>Join Stream</button>
     return (
       <div className="Deployer" style={{display:'inline', float:'left', width:'100%'}}>
-        <div style={{marginLeft: '2%', width:'100%'}}>
-          <button style={nav_buttons} onClick={() => parent.selectCreate()}>New Stream</button> 
-          <button style={nav_buttons} onClick={() => parent.selectView()}>View Posts</button>
-          <button style={nav_buttons} onClick={() => parent.selectJoin()}>Join Stream</button>
+        <div style={buttons}>
+          <div style={active} onClick={() => parent.selectCreate()}>
+            <img src={post} style={{width:'2%', height:'1%', verticalAlign:'top'}}/> <p style={{display:'inline', fontSize:'60%'}}>Post Thoughts</p>
+          </div>
+          <div style={{display:'inline'}} onClick={() => parent.selectView()}>
+            <img src={read} style={{width:'2%', height:'1%', verticalAlign:'top', marginLeft:'20px'}}/> <p style={{display:'inline', fontSize:'60%'}}>Read Thoughts</p>
+          </div>
+          <div style={{display:'inline'}} onClick={() => parent.selectJoin()}>
+            <img src={join} style={{width:'2%', height:'1%', verticalAlign:'top', marginLeft:'20px'}}/> <p style={{display:'inline', fontSize:'60%'}}>Join Stream</p>
+          </div>
         </div>
         
         {content}
@@ -153,7 +177,7 @@ exports.WaitingForAttacher = class extends React.Component {
         
         <br /> Subscribers can join by entering the following contract information
         <pre className='ContractInfo' style={{width:'80%'}}>
-          {ctcInfoStr}
+         {ctcInfoStr}
         </pre>
         <button
           onClick={(e) => this.copyToClipborad(e.currentTarget)}
@@ -305,6 +329,19 @@ const nav_buttons = {
   
 }
 
+const buttons = {
+  marginLeft: '2%', 
+  width:'100%', 
+  marginBottom:'2%', 
+  marginTop: '5px'
+}
+
+const active = {
+  display:'inline', 
+  border:'2px solid steelblue', 
+  borderRadius: '5px', 
+  padding: '10px'
+}
 
 
 export default exports;
