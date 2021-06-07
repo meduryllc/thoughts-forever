@@ -144,10 +144,13 @@ class Subscriber extends User {
   }
   
   async seeMessage(post, streamName){
-    console.log(streamName);
-    this.props.parent.setState({subscriberPosts: [...this.props.parent.state.subscriberPosts, post], sawFirstPost: true});
+    let newPost = {
+      thought: post,
+      stream: streamName
+    }
+    this.props.parent.setState({subscriberPosts: [...this.props.parent.state.subscriberPosts, newPost], sawFirstPost: true});
     //console.log(this.state.posts.length);
-    await this.setState({view: 'ViewPost', alreadyViewed:false, posts: [...this.state.posts, post]});
+    await this.setState({view: 'ViewPost', alreadyViewed:false, posts: [...this.state.posts, newPost]});
   }
 
   subscribe(yesOrNo) {
