@@ -8,17 +8,17 @@ const common = {
 
 const Poster = {
   ...common,
-  post: Fun([], Bytes(128)),
+  post: Fun([], Bytes(140)),
   continueStream: Fun([], UInt),
-  createStream: Fun([], Bytes(128)),
-  streamName : Bytes(128)
+  createStream: Fun([], Bytes(30)),
+  streamName : Bytes(30)
 };
 
 const Subscriber = {
   ...common,
   subscribe: Fun([],Bool),
-  seeMessage: Fun([Bytes(128)], Null),
-  seeStream: Fun([Bytes(128)], Bool)
+  seeMessage: Fun([Bytes(140), Bytes(30)], Null),
+  seeStream: Fun([Bytes(30)], Bool)
 }
 
 export const main = Reach.App(
@@ -51,16 +51,9 @@ export const main = Reach.App(
         // Constraints here
         commit();
 
-        /*
-        B.only(() => {
-          const didSubscribe = declassify(interact.subscribe()); });
-        B.publish(didSubscribe);
-
-        commit();
-        */
         B.only(() => {
           //declassify(interact.seeMessage(somelist[0])); });
-          declassify(interact.seeMessage(message)); });
+          interact.seeMessage(message, streamName) });
 
         A.only(() => {
           const stopNow = declassify(interact.continueStream());
