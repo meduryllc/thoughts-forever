@@ -96,6 +96,7 @@ class Poster extends User {
   }
   async post(){
     const thought = await new Promise(resolvePostedP => {
+      
       this.setState({view: 'PostThought', posts: this.state.posts, resolvePostedP});
     });
     this.setState({view: 'SeePost', createdFirstPost:true, posts: [...this.state.posts, thought], thought});

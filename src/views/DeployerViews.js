@@ -181,7 +181,7 @@ exports.WaitingForAttacher = class extends React.Component {
 
   render() {
     const {ctcInfoStr} = this.props;
-    console.log(this.props);
+    
     return (
       <div style={card}>
         
@@ -199,8 +199,9 @@ exports.WaitingForAttacher = class extends React.Component {
 
 exports.PostThought = class extends React.Component {
   render() {
-    const {parent, defaultStream, posts} = this.props;
-    const streamName = (this.state || {}).streamName || defaultStream;
+    const {parent, defaultStream, posts, streamName} = this.props;
+    
+    
     const lengthOfPost = (this.state || {}).lengthOfPost || 0;
     const thought = (this.state || {}).thought;
     var today = new Date();
