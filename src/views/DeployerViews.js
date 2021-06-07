@@ -35,22 +35,51 @@ exports.CreateStream = class extends React.Component {
   render() {
     const {parent, defaultStream} = this.props;
     const streamName = (this.state || {}).streamName || defaultStream;
+    let lengthOfStream = (this.state || {}).lengthOfStream || 0;
+    let lengthOfPost = (this.state || {}).lengthOfPost || 0;
+    let getSizeOfStream = (stream) => {
+      this.setState({lengthOfStream: stream.length, streamName: stream, overboard:false})
+      
+    }
+    /*
+    <input
+          type='text'
+          style={{height: "30px", width: "80%"}}
+          placeholder={defaultStream}
+          
+          maxLength="30"
+          onChange={(e) => getSizeOfStream(e.currentTarget.value)}
+        /> 
+        <br />
+        <p style={{fontSize:'12px', textAlign:'right', marginRight:'12%'}}>{lengthOfStream}/30</p>
+        <button
+         
+          onClick={() => parent.setStreamName(streamName)}
+        >Create</button>
+    */
+
     
     return (
      
       <div style={card_deploy}>
         <h2>New Stream</h2>
+        
         <input
           type='text'
-          style={{height: "30px", width: "400px"}}
+          style={{height: "30px", width: "80%"}}
           placeholder={defaultStream}
-          onChange={(e) => this.setState({streamName: e.currentTarget.value})}
+          
+          maxLength="30"
+          onChange={(e) => getSizeOfStream(e.currentTarget.value)}
         /> 
         <br />
+        <p style={{fontSize:'12px', textAlign:'right', marginRight:'12%'}}>{lengthOfStream}/30</p>
         <button
          
           onClick={() => parent.setStreamName(streamName)}
         >Create</button>
+        
+        
       </div>
       /*
      <div>
@@ -98,7 +127,7 @@ exports.Deploy = class extends React.Component {
 exports.Deploying = class extends React.Component {
   render() {
     return (
-      <div>Creating your stream... please wait.<br/><img style={{marginTop: '5%'}} src={loader}/></div>
+      <div>Creating your stream... please wait.<br/><img style={{marginTop: '5%', color:'black'}} src={loader}/></div>
       
     );
   }
@@ -123,7 +152,7 @@ exports.WaitingForAttacher = class extends React.Component {
       <div style={card}>
         
         <br /> Subscribers can join by entering the following contract information
-        <pre className='ContractInfo'>
+        <pre className='ContractInfo' style={{width:'80%'}}>
           {ctcInfoStr}
         </pre>
         <button
@@ -138,6 +167,7 @@ exports.PostThought = class extends React.Component {
   render() {
     const {parent, defaultStream, posts} = this.props;
     const streamName = (this.state || {}).streamName || defaultStream;
+    const lengthOfPost = (this.state || {}).lengthOfPost || 0;
     const thought = (this.state || {}).thought;
     var today = new Date();
     var month = parseInt(today.getMonth() + 1);
@@ -154,9 +184,11 @@ exports.PostThought = class extends React.Component {
             rows={6}
             cols={6}
             placeholder='...'
-            onChange={(e) => this.setState({thought: e.currentTarget.value})}
+            maxLength="140"
+            onChange={(e) => this.setState({thought: e.currentTarget.value, lengthOfPost:e.currentTarget.value.length})}
           /> 
-          <br />
+        <p style={{fontSize:'12px', textAlign:'right', marginRight:'35%'}}>{lengthOfPost}/140</p>
+        
         </div>
         <button
           onClick={() => parent.postThought(thought)}

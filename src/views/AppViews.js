@@ -19,11 +19,11 @@ exports.Wrapper = class extends React.Component {
     return (
       <div className="App" >
         
-        <header className="App-header" id="root" >
+        <header className="App-header" id="root" style={{backgroundColor:'white'}} >
           {home ? null : 
             <div style={{textAlign: 'left'}}>
-              <img src={logo} style={{textAlign: 'left', height:'70%', marginLeft: '10%', width:'10%', marginBottom: '2%'}} onClick={() => parent.skipFundAccount()}/>
-              
+              <img src={logo} style={{textAlign: 'left', height:'70%', marginLeft: '10%', width:'10%'}} onClick={() => parent.skipFundAccount()}/>
+              <hr style={{backgroundColor:'steelblue'}}/>
              
             </div>
           }
@@ -81,7 +81,7 @@ exports.DeployerOrAttacher = class extends React.Component {
       <div style={{marginTop: '10%'}}>
         
         <div style={card}>
-           <img src={logo}/>
+           <img src={logo} style={{height:'70%', marginLeft: '10%', width:'70%', marginBottom: '2%'}}/>
           
             <br />
             <p>
