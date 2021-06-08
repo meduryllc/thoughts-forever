@@ -21,10 +21,12 @@ exports.Attach = class extends React.Component {
     const {ctcInfoStr} = this.state || {};
     return (
       <div style={card}>
-        Please paste the contract info to join a stream:
+        <p style={{fontSize:'15px', marginBottom: '10px'}}>Please paste the contract info to join a stream:</p>
         <br />
         <textarea spellCheck="false"
           className='ContractInfo'
+          columns="30"
+          rows="5"
           onChange={(e) => this.setState({ctcInfoStr: e.currentTarget.value})}
           placeholder='{}'
         />
@@ -32,7 +34,7 @@ exports.Attach = class extends React.Component {
         <button
           disabled={!ctcInfoStr}
           onClick={() => parent.attach(ctcInfoStr)}
-        >Attach</button>
+        >Join</button>
       </div>
     );
   }
@@ -56,8 +58,8 @@ exports.ViewStreamName = class extends React.Component {
     const {parent, streamName} = this.props;
     
     return (
-      <div style={card_attach}>
-        Subscribing to: <strong>{streamName}</strong>?
+      <div style={create_or_subscribe}>
+        Subscribing to: <strong>{streamName}</strong>
         <br/>
          <button
           onClick={() => {
@@ -65,7 +67,7 @@ exports.ViewStreamName = class extends React.Component {
           }}
         >Confirm</button>
         <button
-          style={{backgroundColor: 'red'}}
+          style={{backgroundColor: 'grey'}}
           onClick={() => {
             parent.subscribe('No');
           }}
@@ -160,8 +162,19 @@ const card_attach = {
 
 const tweet = {
   ...card_attach,
+  width: '500px',
   textAlign: 'left',
   marginTop: '2%'
+}
+
+const create_or_subscribe = {
+  color: '#000000',
+  backgroundColor: '#FFFFFF',
+  borderRadius: '10px',
+  width: '50vw',
+  marginLeft: '25%',
+  border: '2px solid steelblue',
+  padding: '10px',
 }
 
 export default exports;

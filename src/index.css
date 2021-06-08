@@ -20,8 +20,8 @@ code {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-size: calc(10px + 2vmin);
-  color: black;
+  font-size: 25px;
+  color: #28363D;
 }
 
 .App-link {
@@ -40,7 +40,7 @@ input[type=text] {
 
 button {
   display: inline-block;
-  background:green;
+  background:#D7772E;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -59,26 +59,7 @@ textarea {
 }
 
 .ContractInfo {
-  font-size: calc(10px + 1vmin);
+  font-size: 1.5vw;
   text-align: left;
-  
-  height: 7em;
   padding: 2vw;
-  margin-top: 5%;
-  white-space: pre;
-}
-
-.Card { 
-  color: '#000000';
-  background-color: '#FFFFFF';
-  border-radius: '10px';
-  margin-right: '10px';
-  margin-left: '10px';
-}
-
-.Active {
-  display:'inline';
-  border:'2px solid steelblue';
-  border-radius: '5px';
-  padding: '10px';
 }

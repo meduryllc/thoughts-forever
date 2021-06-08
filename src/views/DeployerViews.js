@@ -17,43 +17,46 @@ exports.Wrapper = class extends React.Component {
 
     const active = {
       display:'inline', 
-      border:'2px solid steelblue', 
+      border:'2px solid #D7772E', 
+      backgroundColor: '#D7772E',
       borderRadius: '5px', 
       padding: '10px',
-      marginLeft: '2%'
+      marginLeft: '2%',
+      color: 'white'
     }
 
     const inactive = {display: 'inline'}
 
-    const posterStyle = (this.state || {}).posterStyle || active;
+    const posterStyle = (this.state || {}).posterStyle || inactive;
     const subscriberStyle = (this.state || {}).subscriberStyle || inactive;
     const joinStyle = (this.state || {}).joinStyle || inactive;
     
     const poster = () => {
       this.setState({posterStyle:active, subscriberStyle:inactive, joinStyle:inactive})
-      parent.selectCreate();
     }
 
     const subscriber = () => {
       this.setState({posterStyle:inactive, subscriberStyle:active, joinStyle:inactive});
-      parent.selectView();
     }
 
     const joinNewStream = () => {
       this.setState({posterStyle:inactive, subscriberStyle:inactive, joinStyle:active});
-      parent.selectJoin();
+    }
+
+    const mouseLeave = () => {
+      this.setState({posterStyle:inactive, subscriberStyle:inactive, joinStyle:inactive});
     }
    
     return (
       <div className="Deployer" style={{display:'inline', float:'left', width:'100%'}}>
         <div style={buttons}>
-          <div style={posterStyle} onClick={() => poster()}>
+          <div style={posterStyle} onClick={() => parent.selectCreate()} onMouseEnter={() => poster()} onMouseLeave={() => mouseLeave()}>
             <img src={post} style={image_style}/> <p style={{display:'inline', fontSize:'60%'}}>Post Thoughts</p>
           </div>
-          <div style={subscriberStyle} onClick={() => subscriber() }>
+          <div style={subscriberStyle} onClick={() => parent.selectView()} onMouseEnter={() => subscriber()} onMouseLeave={() => mouseLeave()}>
             <img src={read} style={image_style}/> <p style={{display:'inline', fontSize:'60%'}}>Read Thoughts</p>
           </div>
-          <div style={joinStyle} onClick={() => joinNewStream()}>
+          <div style={joinStyle} onClick={() => parent.selectJoin()} onMouseEnter={() => joinNewStream()} onMouseLeave={() => mouseLeave()}>
             <img src={join} style={image_style}/> <p style={{display:'inline', fontSize:'60%'}}>Join Stream</p>
           </div>
         </div>
@@ -96,12 +99,12 @@ exports.CreateStream = class extends React.Component {
     return (
      
       <div style={card_deploy}>
-        <h2>New Stream</h2>
+        <p style={{fontSize: '20px'}}>Start a new stream</p>
         
         <input
           type='text'
           style={{height: "30px", width: "80%"}}
-          placeholder={defaultStream}
+          placeholder='Enter the name of stream'
           
           maxLength="30"
           onChange={(e) => getSizeOfStream(e.currentTarget.value)}
@@ -147,7 +150,7 @@ exports.Deploy = class extends React.Component {
   render() {
     const {parent, streamName} = this.props;
     return (
-      <div style={card_deploy}>
+      <div style={create_or_subscribe}>
         Creating Stream: <strong>{streamName}</strong>
         <br />
         <button
@@ -185,8 +188,8 @@ exports.WaitingForAttacher = class extends React.Component {
     return (
       <div style={card}>
         
-        <br /> Subscribers can join by entering the following contract information
-        <pre className='ContractInfo' style={{width:'80%'}}>
+        <br /> <p style={{fontSize: '1.5vw'}}>Subscribers can join by entering the following contract information</p> 
+        <pre className='ContractInfo'>
          {ctcInfoStr}
         </pre>
         <button
@@ -282,7 +285,7 @@ exports.ContinueOrStop = class extends React.Component {
             parent.continue('Continue');
           }}
         >Continue</button>
-        <button
+        <button style={{backgroundColor:'grey'}}
           onClick={() => {
             parent.continue('Stop');
           }}
@@ -311,22 +314,35 @@ const card = {
   marginRight: '10%',
   marginLeft: '10%',
   border: '2px solid steelblue',
-  padding: '10px'
+  padding: '10px', 
+  width: '85vw'
 }
 
 const card_deploy = {
   color: '#000000',
   backgroundColor: '#FFFFFF',
   borderRadius: '10px',
-  width: '30vw',
-  marginLeft: '35%',
+  width: '40vw',
+  marginLeft: '30%',
   border: '2px solid steelblue',
   padding: '10px',
   
 }
 
+const create_or_subscribe = {
+  color: '#000000',
+  backgroundColor: '#FFFFFF',
+  borderRadius: '10px',
+  width: '50vw',
+  marginLeft: '25%',
+  border: '2px solid steelblue',
+  padding: '10px',
+}
+
 const tweet = {
   ...card_deploy,
+  width: '500px',
+  marginLeft: '35%',
   textAlign: 'left',
   marginTop:'2%'
 }
@@ -343,11 +359,10 @@ const nav_buttons = {
 const buttons = {
   marginLeft: '2%', 
   width:'100%', 
-  marginBottom:'2%', 
+  marginBottom:'50px', 
   marginTop: '5px'
 }
 
-const image_style = {width:'2%', height:'1%', verticalAlign:'top', marginLeft:'20px'}
-
+const image_style = {width:'30px', height:'30px', verticalAlign:'top', marginLeft:'20px'}
 
 export default exports;

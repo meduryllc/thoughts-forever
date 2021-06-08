@@ -25,6 +25,7 @@ class App extends React.Component {
     await reach.setSignStrategy('AlgoSigner');
     */
     const acc = await reach.getDefaultAccount();
+    
     const balAtomic = await reach.balanceOf(acc);
     
     const bal = reach.formatCurrency(balAtomic, 4);

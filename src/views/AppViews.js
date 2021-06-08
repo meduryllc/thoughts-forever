@@ -22,7 +22,7 @@ exports.Wrapper = class extends React.Component {
         <header className="App-header" id="root" style={{backgroundColor:'white'}} >
           {home ? null : 
             <div style={{textAlign: 'left'}}>
-              <img src={logo} style={{textAlign: 'left', height:'70%', marginLeft: '10%', width:'10%'}} onClick={() => parent.skipFundAccount()}/>
+              <img src={logo} style={{textAlign: 'left', height:'100px', marginLeft: '10%', width:'225px'}} onClick={() => parent.skipFundAccount()}/>
               <hr style={{backgroundColor:'steelblue'}}/>
              
             </div>
@@ -81,8 +81,9 @@ exports.DeployerOrAttacher = class extends React.Component {
       <div style={{marginTop: '10%'}}>
         
         <div style={card}>
-           <img src={logo} style={{height:'70%', marginLeft: '10%', width:'70%', marginBottom: '2%'}}/>
-          
+           <img src={logo} style={{height:'100%', marginLeft: '10%', width:'90%', marginBottom: '2%'}}/>
+            <br/>
+            <em style={{fontSize:'60%'}}>Censorship-resistant micro-blogging application</em>
             <br />
             <p>
               <button
