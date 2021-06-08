@@ -7,6 +7,22 @@ const exports = {...PlayerViews};
 exports.Wrapper = class extends React.Component {
   render() {
     const {content} = this.props;
+    
+    const sawFirstPost= this.props.content.props.sawFirstPost;
+    const joinStream=this.props.content.props.joinStream;
+    const seePosts=this.props.content.props.seePost;
+    const parent = this.props.content.props.parent;
+    
+    if(sawFirstPost && joinStream) parent.joinNewStream();
+    if(!joinStream && sawFirstPost && !seePosts) parent.viewPosts();
+    /*
+    
+    const wantToJoin = this.props.content.props.joinStream;
+    const joining = this.props.content.props.joining;
+    console.log(joining, wantToJoin);
+    if(wantToJoin && joining) parent.joinNewStream();
+    */
+
     return (
       <div className="Attacher" style={{display:'inline-block', float:'left', width:'100%'}}>
         {content}
@@ -100,7 +116,7 @@ exports.ViewPost = class extends React.Component {
                 */
                 <div key={post.thought} style={tweet}>
        
-                <span style={{fontSize: '20px', display:'inline'}}><img style={{width: '10%', height:'20%', display:'inline', verticalAlign:'top'}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/768px-User_icon_2.svg.png"/><strong>Alice</strong></span><p style={{color:'grey', fontSize:'20px', marginLeft:'1%', display:'inline'}}>@{post.stream} | {today}</p>
+                <span style={{fontSize: '20px', display:'inline'}}><img style={{width: '10%', height:'20%', display:'inline', verticalAlign:'top'}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/768px-User_icon_2.svg.png"/><strong>{post.address.substring(0,6)+'....'}</strong></span><p style={{color:'grey', fontSize:'20px', marginLeft:'1%', display:'inline'}}>@{post.stream} | {today}</p>
                 
                   <p style={{fontSize: '20px', marginLeft: '10%'}}>{post.thought}</p>
                 </div>

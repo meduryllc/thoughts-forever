@@ -72,8 +72,8 @@ class Poster extends User {
     }
 
     const inactive = {display: 'inline'}
-
-    this.state = {view: 'CreateStream',posts: [], subscriberPosts: [], sawFirstPost: false, createdFirstPost: false}; 
+    const address = props.acc.getAddress();
+    this.state = {view: 'CreateStream',posts: [], seePost:false, subscriberPosts: [], sawFirstPost: false, address:address, createdFirstPost: false}; 
   }
   
   async setStreamName(streamName){
@@ -84,12 +84,15 @@ class Poster extends User {
   }
 
   selectJoin() {
+    //console.log(this);
     this.setState({home:false, poster: false, joinStream: true, subscriber: true, view: 'Wrapper', ContentView: Subscriber});
+    //this.setState({view: 'PostThought'})
   }
   
   selectView() {
+    
     if(!this.state.sawFirstPost) this.setState({home:false, poster: false, subscriber: true, view: 'Wrapper', ContentView: Subscriber});
-    else {this.setState({home:false, poster: false, joinStream:false, subscriber: true, sawPost:true, view: 'Wrapper', ContentView: Subscriber})}
+    else {this.setState({home:false, poster: false, joinStream:false, subscriber: true, seePost:false, view: 'Wrapper', ContentView: Subscriber})}
   }
   selectCreate() { 
     if(this.state.createdFirstPost) this.setState({view: 'PostThought'}); 
@@ -130,7 +133,6 @@ class Poster extends User {
     
   }
 
-  //TODO: Fix this to a new layout for seeing end of stream
   
   render() { return renderView(this, DeployerViews); }
 }
@@ -138,10 +140,20 @@ class Poster extends User {
 class Subscriber extends User {
   constructor(props) {
     super(props);
-
+    
     if(props.sawFirstPost && !props.joinStream) {this.state = {view: 'ViewPost', alreadyViewed: true, posts: props.subscriberPosts}}
     else {this.state = {view: 'Attach', posts: []}};
   }
+  joinNewStream() {
+    this.props.parent.setState({joinStream:false});
+    this.setState({view:'Attach'})
+  }
+  
+  viewPosts() {
+    this.props.parent.setState({seePost:true});
+    this.setState({view:'ViewPost'})
+  }
+  
   attach(ctcInfoStr) {
     const ctc = this.props.acc.attach(backend, JSON.parse(ctcInfoStr));
     this.setState({view: 'Attaching'});
@@ -155,12 +167,13 @@ class Subscriber extends User {
     return true;
   }
   
-  async seeMessage(post, streamName){
+  async seeMessage(post, streamName, address){
     let newPost = {
       thought: post,
-      stream: streamName
+      stream: streamName,
+      address: address
     }
-    this.props.parent.setState({subscriberPosts: [...this.props.parent.state.subscriberPosts, newPost], sawFirstPost: true});
+    this.props.parent.setState({subscriberPosts: [...this.props.parent.state.subscriberPosts, newPost],seePost:true, sawFirstPost: true});
     //console.log(this.state.posts.length);
     await this.setState({view: 'ViewPost', alreadyViewed:false, posts: [...this.state.posts, newPost]});
   }
@@ -169,7 +182,7 @@ class Subscriber extends User {
     
     if(yesOrNo == 'Yes'){
       this.state.resolveAcceptedP();
-      this.setState({view: 'WaitingForTurn'});
+      this.setState({view: 'WaitingForTurn', joining:true});
     }
     else{
       this.setState({view: 'Attach'});

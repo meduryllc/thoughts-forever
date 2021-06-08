@@ -17,7 +17,7 @@ const Poster = {
 const Subscriber = {
   ...common,
   subscribe: Fun([],Bool),
-  seeMessage: Fun([Bytes(140), Bytes(30)], Null),
+  seeMessage: Fun([Bytes(140), Bytes(30), Address], Null),
   seeStream: Fun([Bytes(30)], Bool)
 }
 
@@ -28,9 +28,10 @@ export const main = Reach.App(
       
       A.only(() => {
         const streamName = declassify(interact.createStream());
+        const creator = this;
       });
       
-      A.publish(streamName);
+      A.publish(streamName, creator);
       commit();
 
       B.only(() => {
@@ -53,7 +54,7 @@ export const main = Reach.App(
 
         B.only(() => {
           //declassify(interact.seeMessage(somelist[0])); });
-          interact.seeMessage(message, streamName) });
+          interact.seeMessage(message, streamName, creator) });
 
         A.only(() => {
           const stopNow = declassify(interact.continueStream());
