@@ -133,6 +133,10 @@ class Poster extends User {
     
   }
 
+  async help() {
+    this.setState({view:'Help'})
+  }
+
   
   render() { return renderView(this, DeployerViews); }
 }

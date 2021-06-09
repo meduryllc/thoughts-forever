@@ -4,7 +4,7 @@ import loader from './assets/grid.svg'
 import read from './assets/readIcon.png'
 import post from './assets/postIcon.png'
 import join from './assets/joinIcon.png'
-
+import help from './assets/help.png'
 
 const exports = {...PlayerViews};
 
@@ -30,21 +30,25 @@ exports.Wrapper = class extends React.Component {
     const posterStyle = (this.state || {}).posterStyle || inactive;
     const subscriberStyle = (this.state || {}).subscriberStyle || inactive;
     const joinStyle = (this.state || {}).joinStyle || inactive;
+    const helpStyle = (this.state || {}).helpStyle || inactive;
     
     const poster = () => {
-      this.setState({posterStyle:active, subscriberStyle:inactive, joinStyle:inactive})
+      this.setState({posterStyle:active})
     }
 
     const subscriber = () => {
-      this.setState({posterStyle:inactive, subscriberStyle:active, joinStyle:inactive});
+      this.setState({subscriberStyle:active});
     }
 
     const joinNewStream = () => {
-      this.setState({posterStyle:inactive, subscriberStyle:inactive, joinStyle:active});
+      this.setState({joinStyle:active});
+    }
+    const onHelp = () => {
+      this.setState({helpStyle:active});
     }
 
     const mouseLeave = () => {
-      this.setState({posterStyle:inactive, subscriberStyle:inactive, joinStyle:inactive});
+      this.setState({posterStyle:inactive, subscriberStyle:inactive, joinStyle:inactive, helpStyle:inactive});
     }
    
     return (
@@ -59,6 +63,10 @@ exports.Wrapper = class extends React.Component {
           <div style={joinStyle} onClick={() => parent.selectJoin()} onMouseEnter={() => joinNewStream()} onMouseLeave={() => mouseLeave()}>
             <img src={join} style={image_style}/> <p style={{display:'inline', fontSize:'60%'}}>Join Stream</p>
           </div>
+          <div style={helpStyle} onClick={() => parent.help()} onMouseEnter={() => onHelp()} onMouseLeave={() => mouseLeave()}>
+            <img src={help} style={image_style}/> <p style={{display:'inline', fontSize:'60%'}}>Help</p>
+          </div>
+         
         </div>
         
         {content}
@@ -195,6 +203,51 @@ exports.WaitingForAttacher = class extends React.Component {
         <button
           onClick={(e) => this.copyToClipborad(e.currentTarget)}
         >Copy to clipboard</button>
+      </div>
+    )
+  }
+}
+
+exports.Help = class extends React.Component {
+
+  /*
+  <p>A <strong>thought</strong> is a post of utmost 140 characters (we currently only allow ASCII characters). <br/></p>
+        <p>A <strong>stream </strong>is a collection of thoughts posted by a user. <br /></p>
+        <p>To create a stream, click on <img style={image_style} src={post} /> Post Thoughts on the top. <br /></p>
+        <p>After providing a name to the stream and clicking on deploy, the contract information will be displayed on the screen. <br/></p>
+        <p>This information must be shared with the subscribers to allow them to subscribe to your stream.</p>
+        <p>Atleast one user must subscribe to your stream before you start sharing your thoughts.</p>
+        <p>To join a stream, click on <img style={image_style} src={join} /> Join Stream on the top. <br /></p>
+        <p>Enter the contract information shared by the creator of the stream to subscribe.<br /></p>
+        <p>You'll be able to view thoughts posted by the creator after subscribing to the stream.<br /></p>
+        <p>You can join unlimited streams. <br/></p>
+        <p>You can view all the thoughts from all the streams you've subscribed to in the <img style={image_style} src={read} /> Read Thoughts section.</p>
+        */
+  
+  render() {
+    
+    
+    return (
+      <div style={card}>
+        Help Section
+        <div style={{textAlign:'left', fontSize:'20px', marginTop:'3%', marginBottom:'3%'}}>
+       <ol>
+         <li>A <strong>thought</strong> is a post of utmost 140 characters (we currently only allow ASCII characters).</li><br/>
+         <li>A <strong>stream </strong>is a collection of thoughts posted by a user.</li> <br/>
+         <li>To create a stream, click on <img style={image_style} src={post} /> Post Thoughts on the top.</li> <br/>
+         <li>After providing a name to the stream and clicking on deploy, the contract information will be displayed on the screen.</li> <br/>
+         <li>This information must be shared with the subscribers to allow them to subscribe to your stream.</li> <br/>
+         <li>Atleast one user must subscribe to your stream before you start sharing your thoughts.</li> <br/>
+         <li>To join a stream, click on <img style={image_style} src={join} /> Join Stream on the top. </li> <br/>
+         <li>Enter the contract information shared by the creator of the stream to subscribe.</li> <br/>
+         <li>You'll be able to view thoughts posted by the creator after subscribing to the stream.</li> <br/>
+         <li>You can join unlimited streams.</li> <br/>
+         <li>You can view all the thoughts from all the streams you've subscribed to in the <img style={image_style} src={read} /> Read Thoughts section.</li> <br/>
+         
+       </ol>
+        
+
+        </div>
       </div>
     )
   }
