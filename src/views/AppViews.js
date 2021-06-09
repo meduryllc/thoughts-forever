@@ -1,6 +1,10 @@
 import React from 'react';
 import logo from './assets/tflogo.png'
 import loader from './assets/grid.svg'
+import all_logos from './assets/Reach-ThoughtsForever.png'
+
+import teamMembers from './assets/sai-lalith.png'
+
 
 const exports = {};
 
@@ -93,15 +97,17 @@ exports.DeployerOrAttacher = class extends React.Component {
             <br />
             <p>
               <button
+                onClick={() => parent.aboutUs()}
+                style={{marginRight: "10px", backgroundColor:'grey'}}
+              >About Us</button>
+              <button
                 onClick={() => parent.selectCreate()}
                 style={{marginRight: "10px"}}
               >Get Started</button>
+              
 
             </p>
-            <p>
-              
             
-            </p>
         </div>
        
       </div>
@@ -109,11 +115,41 @@ exports.DeployerOrAttacher = class extends React.Component {
   }
 }
 
+exports.AboutUs = class extends React.Component {
+  render() {
+    const {parent} = this.props;
+    return (
+      <div >
+    
+        <img src={all_logos} />
+        <br />
+        <div style={card}>
+          About Us: 
+          <div style={{fontSize:'20px', textAlign:'left', marginTop: '3%', padding: '10px'}}>
+            <strong>Thoughts Forever</strong> is a Micro-blogging Application built with <strong>Reach</strong> on <strong>Algorand</strong> during Universities Unchained Hackathon 2021. With this microblogging
+            application, users can subscribe to unlimited streams and launch their own. The team members of this project include Sai Medury, a PhD. candidate
+            from University of Tennessee, Chattanooga and Lalith Medury, a junior year undergraduate from Vidya Jyothi Institute of Technology, India. 
+            <br/>
+            <div style={{marginTop:'5%', marginLeft:'20%'}}>
+              
+                <img src={teamMembers} style={{height:'200px', width:'400px', borderRadius:'10px'}}/>
+              
+            </div>
+            
+          </div>
+        </div>
+       
+      </div>
+    );
+  }
+}
+
+
 const card = {
   color: '#000000',
   backgroundColor: '#FFFFFF',
   borderRadius: '10px',
-  width: '30vw',
+  width: '40vw',
   marginTop: '0%',
   border: '2px solid steelblue',
   padding: '10px',

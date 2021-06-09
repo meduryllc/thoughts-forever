@@ -48,6 +48,7 @@ class App extends React.Component {
   //selectJoin() { this.setState({home:false, poster: true, subscriber: false, view: 'Wrapper', ContentView: Subscriber}); }
   selectJoin() {this.setState({home:false, poster: false, subscriber: true, view: 'Wrapper', ContentView: Subscriber});}
   selectCreate() { this.setState({home:false, subscriber: false, poster:true, view: 'Wrapper', ContentView: Poster}); }
+  aboutUs() {this.setState({home:false, view:'AboutUs'})}
   
   render() { return renderView(this, AppViews); }
 }

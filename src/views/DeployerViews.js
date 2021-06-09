@@ -242,7 +242,7 @@ exports.Help = class extends React.Component {
          <li>Enter the contract information shared by the creator of the stream to subscribe.</li> <br/>
          <li>You'll be able to view thoughts posted by the creator after subscribing to the stream.</li> <br/>
          <li>You can join unlimited streams.</li> <br/>
-         <li>You can view all the thoughts from all the streams you've subscribed to in the <img style={image_style} src={read} /> Read Thoughts section.</li> <br/>
+         <li>In the <img style={image_style} src={read} /> Read Thoughts section, you can view all the thoughts from the streams you've subscribed to earlier.</li> <br/>
          
        </ol>
         
