@@ -171,45 +171,47 @@ exports.WaitingForAttacher = class extends React.Component {
 
 exports.Help = class extends React.Component {
 
-  /*
-  <p>A <strong>thought</strong> is a post of utmost 140 characters (we currently only allow ASCII characters). <br/></p>
-        <p>A <strong>stream </strong>is a collection of thoughts posted by a user. <br /></p>
-        <p>To create a stream, click on <img style={image_style} src={post} /> Post Thoughts on the top. <br /></p>
-        <p>After providing a name to the stream and clicking on deploy, the contract information will be displayed on the screen. <br/></p>
-        <p>This information must be shared with the subscribers to allow them to subscribe to your stream.</p>
-        <p>Atleast one user must subscribe to your stream before you start sharing your thoughts.</p>
-        <p>To join a stream, click on <img style={image_style} src={join} /> Join Stream on the top. <br /></p>
-        <p>Enter the contract information shared by the creator of the stream to subscribe.<br /></p>
-        <p>You'll be able to view thoughts posted by the creator after subscribing to the stream.<br /></p>
-        <p>You can join unlimited streams. <br/></p>
-        <p>You can view all the thoughts from all the streams you've subscribed to in the <img style={image_style} src={read} /> Read Thoughts section.</p>
-        */
-  
   render() {
     
     
     return (
       <div className='Card'>
-        Help Section
-        <div style={{textAlign:'left', fontSize:'20px', marginTop:'3%', marginBottom:'3%'}}>
-       <ol>
-         <li>A <strong>thought</strong> is a post of utmost 140 characters (we currently only allow ASCII characters).</li><br/>
-         <li>A <strong>stream </strong>is a collection of thoughts posted by a user.</li> <br/>
-         <li>To create a stream, click on <img className='Icons' src={post} /> Post Thoughts on the top.</li> <br/>
-         <li>After providing a name to the stream and clicking on deploy, the contract information will be displayed on the screen.</li> <br/>
-         <li>This information must be shared with the subscribers to allow them to subscribe to your stream.</li> <br/>
-         <li>Atleast one user must subscribe to your stream before you start sharing your thoughts.</li> <br/>
-         <li>To join a stream, click on <img className='Icons' src={join} /> Join Stream on the top. </li> <br/>
-         <li>Enter the contract information shared by the creator of the stream to subscribe.</li> <br/>
-         <li>You'll be able to view thoughts posted by the creator after subscribing to the stream.</li> <br/>
-         <li>You can join unlimited streams.</li> <br/>
-         <li>In the <img className='Icons' src={read} /> Read Thoughts section, you can view all the thoughts from the streams you've subscribed to earlier.</li> <br/>
-         
-       </ol>
-        
-
+        <div id='help-page-card-header' style={{textAlign:'center', fontSize:'24px', marginTop:'3%', marginBottom:'3%',marginLeft:'1%'}}>
+        <h2>Help Page</h2>
+        Thoughts Forever is a micro-blogging alternative that is also censorhip-resistant and open to everyone.
         </div>
-      </div>
+        <div id='custom-terminology' style={{textAlign:'left', fontSize:'20px', marginTop:'3%', marginBottom:'3%',marginLeft:'1%'}}>
+          <h4>Custom Terminology</h4>
+          <ul>
+            <li><strong>Thought:</strong> a post of utmost 140 characters shared by a user.</li><br/>
+            <li><strong>Stream:</strong> a collection of thoughts that a user can post to and other users can subscribe to read thoughts.</li> <br/>
+            <li><strong>Contract Info:</strong> the Algorand Smart Contract (ASC) information generated after creating a new stream and is required by a user to subscribe to a stream</li>
+          </ul>
+        </div>
+        <div id='using-the-app' style={{textAlign:'left', fontSize:'20px', marginTop:'3%', marginBottom:'3%',marginLeft:'1%'}}>
+          <h4>Using the DApp</h4>
+          <strong>Software Requirements:</strong> Google Chrome browser and AlgoSigner extension<br/><br/>
+          <strong>Creating a new stream:</strong>
+          <ul>
+          <li>To create a stream, click on<img className='Icons' src={post} /> Post Thoughts on the top.</li> <br/>
+          <li>After providing a name to the stream and clicking on deploy, the contract information will be displayed on the screen.</li> <br/>
+          <li>Share this info with your friends so that they can subscribe to your stream and start following your thoughts</li> <br/>
+          <li><strong>Note:</strong> Atleast one user must subscribe to your stream before you can start sharing your thoughts.</li> <br/>
+          </ul>
+          <strong>Joining a stream:</strong>
+          <ul>
+            <li>To join a stream, click on<img className='Icons' src={join} /> Join Stream on the top. </li> <br/>
+            <li>You should have received the Contract Info of a stream created by your friend. If not, please ask your friend to share it</li><br/>
+            <li>Enter the contract information shared that your friend (the creator of the stream) shared to subscribe.</li> <br/>
+          </ul>
+          <strong>Read Thoughts:</strong>
+          <ul>
+            <li>In the <img className='Icons' src={read} /> Read Thoughts section, you can view all the thoughts from the streams you've subscribed to earlier.</li> <br/>
+            <li>You'll be able to view thoughts posted by the creator after subscribing to the stream.</li> <br/>
+            <li>You can join unlimited streams.</li><br/>
+          </ul>
+          </div>
+        </div>
     )
   }
 }

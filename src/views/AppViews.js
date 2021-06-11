@@ -126,17 +126,19 @@ exports.AboutUs = class extends React.Component {
         <br />
         <div style={about_us}>
           About Us: 
-          <div style={{fontSize:'20px', textAlign:'left', marginTop: '3%', padding: '10px'}}>
-            <strong>Thoughts Forever</strong> is a Micro-blogging Application built with <strong>Reach</strong> on <strong>Algorand</strong> during Universities Unchained Hackathon 2021. With this microblogging
-            application, users can subscribe to unlimited streams and launch their own. The team members of this project include Sai Medury, a PhD. candidate
-            from University of Tennessee, Chattanooga and Lalith Medury, a junior year undergraduate from Vidya Jyothi Institute of Technology, India. 
+          <div style={{fontSize:'20px', textAlign:'center', marginTop: '3%', padding: '10px', marginBottom:'2%'}}>
+            <strong>Thoughts Forever</strong> is a Decentralized Application (DApp) developed using <strong><a href="https://reach.sh/">Reach</a></strong> and the <strong><a href="https://www.algorand.com/">Algorand</a></strong> blockchain platform.<br/>
+            It was developed as a project during the Universities Unchained Hackathon 2021.
             <br/>
-            <div style={{marginTop:'5%', marginLeft:'30%'}}>
+            <div style={{marginTop:'5%'}}>
               
                 <img src={teamMembers} style={{height:'60%', width:'60%'}}/>
               
-            </div>
-            
+            </div><br/>
+            The team members of this project are:<br/><br/> 
+            Sai Medury, a PhD. candidate at University of Tennessee, Chattanooga<br/><br/>
+            Lalith Medury, a junior year undergraduate from Vidya Jyothi Institute of Technology, India<br/><br/>
+            <br/><br/>
           </div>
         </div>
        
