@@ -5,8 +5,8 @@ import AttacherViews from './views/AttacherViews';
 import {renderDOM, renderView} from './views/render';
 import './index.css';
 import * as backend from './build/index.main.mjs';
-import * as reach from '@reach-sh/stdlib/ALGO';
-//import * as reach from '@reach-sh/stdlib/ETH';
+//import * as reach from '@reach-sh/stdlib/ALGO';
+import * as reach from '@reach-sh/stdlib/ETH';
 
 
 const {standardUnit} = reach;
@@ -19,10 +19,11 @@ class App extends React.Component {
     this.state = {view: 'ConnectAccount', ...defaults, home: true};
   }
   async componentDidMount() {
-    //Uncomment the following lines to run on Algorand Testnet with AlgoSigner
+    
+    /*
     await reach.setProviderByName('TestNet');
     await reach.setSignStrategy('AlgoSigner');
-
+    */
     const acc = await reach.getDefaultAccount();
     
     const balAtomic = await reach.balanceOf(acc);
@@ -64,14 +65,6 @@ class Poster extends User {
   constructor(props) {
     super(props);
 
-    const active = {
-      display:'inline', 
-      border:'2px solid steelblue', 
-      borderRadius: '5px', 
-      padding: '10px'
-    }
-
-    const inactive = {display: 'inline'}
     const address = props.acc.getAddress();
     this.state = {view: 'CreateStream',posts: [], seePost:false, subscriberPosts: [], sawFirstPost: false, address:address, createdFirstPost: false}; 
   }
@@ -84,9 +77,9 @@ class Poster extends User {
   }
 
   selectJoin() {
-    //console.log(this);
+    
     this.setState({home:false, poster: false, joinStream: true, subscriber: true, view: 'Wrapper', ContentView: Subscriber});
-    //this.setState({view: 'PostThought'})
+    
   }
   
   selectView() {
@@ -178,7 +171,7 @@ class Subscriber extends User {
       address: address
     }
     this.props.parent.setState({subscriberPosts: [...this.props.parent.state.subscriberPosts, newPost],seePost:true, sawFirstPost: true});
-    //console.log(this.state.posts.length);
+    
     await this.setState({view: 'ViewPost', alreadyViewed:false, posts: [...this.state.posts, newPost]});
   }
 
@@ -193,7 +186,6 @@ class Subscriber extends User {
     }
   }
 
-  //TODO: Fix this to a new layout for seeing end of stream
   
   render() { return renderView(this, AttacherViews); }
 }

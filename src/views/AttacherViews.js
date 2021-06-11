@@ -1,8 +1,8 @@
 import React from 'react';
-import PlayerViews from './PlayerViews';
 import loader from './assets/grid.svg'
+import '../index.css'
 
-const exports = {...PlayerViews};
+const exports = {};
 
 exports.Wrapper = class extends React.Component {
   render() {
@@ -15,14 +15,7 @@ exports.Wrapper = class extends React.Component {
     
     if(sawFirstPost && joinStream) parent.joinNewStream();
     if(!joinStream && sawFirstPost && !seePosts) parent.viewPosts();
-    /*
     
-    const wantToJoin = this.props.content.props.joinStream;
-    const joining = this.props.content.props.joining;
-    console.log(joining, wantToJoin);
-    if(wantToJoin && joining) parent.joinNewStream();
-    */
-
     return (
       <div className="Attacher" style={{display:'inline-block', float:'left', width:'100%'}}>
         {content}
@@ -36,7 +29,7 @@ exports.Attach = class extends React.Component {
     const {parent} = this.props;
     const {ctcInfoStr} = this.state || {};
     return (
-      <div style={card}>
+      <div className='CardAttach'>
         <p style={{fontSize:'15px', marginBottom: '10px'}}>Please paste the contract info to join a stream:</p>
         <br />
         <textarea spellCheck="false"
@@ -60,7 +53,7 @@ exports.Attaching = class extends React.Component {
   render() {
     const {streamName} = this.props;
     return (
-      <div style={card}>
+      <div className='CardAttach'>
         Subscribing {streamName}
         <br/>
         <img src={loader} style={{marginTop: '5%'}}/>
@@ -74,7 +67,7 @@ exports.ViewStreamName = class extends React.Component {
     const {parent, streamName} = this.props;
     
     return (
-      <div style={create_or_subscribe}>
+      <div className='CreateOrSubscribe'>
         Subscribing to: <strong>{streamName}</strong>
         <br/>
          <button
@@ -109,12 +102,8 @@ exports.ViewPost = class extends React.Component {
           
             {posts.map(post => {
               return (
-                /*
-                <div style={card_attach}>
-                  <p style={{size: '10px'}}>{post}</p>
-                </div>
-                */
-                <div key={post.thought} style={tweet}>
+               
+                <div key={post.thought} className='SubscriberTweet'>
        
                 <span style={{fontSize: '20px', display:'inline'}}><img style={{width: '10%', height:'20%', display:'inline', verticalAlign:'top'}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/768px-User_icon_2.svg.png"/><strong>{post.address.substring(0,6)+'....'}</strong></span><p style={{color:'grey', fontSize:'20px', marginLeft:'1%', display:'inline'}}>@{post.stream} | {today}</p>
                 
@@ -144,53 +133,15 @@ exports.WaitingForTurn = class extends React.Component {
 
 exports.EndStream = class extends React.Component {
   render() {
-    const {parent, thought} = this.props;
+    
     return (
-      <div style={card_attach}>
+      <div className='WideCard'>
           <h3>Thank you! The stream has stopped. </h3>
       </div>
     );
   }
 }
 
-const card = {
-  marginTop: '20px',
-  color: '#000000',
-  backgroundColor: '#FFFFFF',
-  
-  borderRadius: '10px',
-  marginRight: '10%',
-  marginLeft: '10%',
-  border: '2px solid steelblue',
-  padding: '10px',
-  
-}
 
-const card_attach = {
-  color: '#000000',
-  backgroundColor: '#FFFFFF',
-  borderRadius: '10px',
-  width: '30vw',
-  marginLeft: '35%',
-  border: '2px solid steelblue',
-  padding: '10px'
-}
-
-const tweet = {
-  ...card_attach,
-  width: '500px',
-  textAlign: 'left',
-  marginTop: '2%'
-}
-
-const create_or_subscribe = {
-  color: '#000000',
-  backgroundColor: '#FFFFFF',
-  borderRadius: '10px',
-  width: '50vw',
-  marginLeft: '25%',
-  border: '2px solid steelblue',
-  padding: '10px',
-}
 
 export default exports;
