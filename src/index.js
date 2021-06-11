@@ -5,8 +5,8 @@ import AttacherViews from './views/AttacherViews';
 import {renderDOM, renderView} from './views/render';
 import './index.css';
 import * as backend from './build/index.main.mjs';
-//import * as reach from '@reach-sh/stdlib/ALGO';
-import * as reach from '@reach-sh/stdlib/ETH';
+import * as reach from '@reach-sh/stdlib/ALGO';
+//import * as reach from '@reach-sh/stdlib/ETH';
 
 
 const {standardUnit} = reach;
@@ -20,10 +20,9 @@ class App extends React.Component {
   }
   async componentDidMount() {
     //Uncomment the following lines to run on Algorand Testnet with AlgoSigner
-    /*
     await reach.setProviderByName('TestNet');
     await reach.setSignStrategy('AlgoSigner');
-    */
+
     const acc = await reach.getDefaultAccount();
     
     const balAtomic = await reach.balanceOf(acc);
