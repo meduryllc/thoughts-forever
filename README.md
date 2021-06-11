@@ -1,1 +1,1 @@
-# thoughts-forever
+# Thoughts Forever
