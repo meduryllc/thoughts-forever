@@ -109,3 +109,5 @@ dist
 
 # Reach Executable
 reach
+
+package-lock.json
