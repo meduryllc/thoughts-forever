@@ -98,7 +98,7 @@ exports.DeployerOrAttacher = class extends React.Component {
             <p>
               <button
                 onClick={() => parent.aboutUs()}
-                style={{marginRight: "10px", backgroundColor:'grey'}}
+                style={{marginRight: "10px", backgroundColor:'#28363D'}}
               >About Us</button>
               <button
                 onClick={() => parent.selectCreate()}
