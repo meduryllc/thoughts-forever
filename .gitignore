@@ -1,5 +1,6 @@
 # VS Code folder
 .vscode/
+docker-compose.yml.react
 
 # Logs
 logs
