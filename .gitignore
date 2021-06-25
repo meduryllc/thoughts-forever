@@ -110,4 +110,8 @@ dist
 # Reach Executable
 reach
 
+src/build
+
 package-lock.json
+
+.docker/

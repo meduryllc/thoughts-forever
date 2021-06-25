@@ -3,7 +3,7 @@
   "version": "0.0.8",
   "private": true,
   "dependencies": {
-    "@reach-sh/stdlib": "<=0.1.2-rc.49",
+    "algosdk": "github:algorand/js-algorand-sdk#d7c9f8946bce78d41db247883622df569d643c0f",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
