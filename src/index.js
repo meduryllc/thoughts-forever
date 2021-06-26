@@ -19,17 +19,8 @@ class App extends React.Component {
     this.state = {view: 'ConnectAccount', ...defaults, home: true};
   }
   async componentDidMount() {
-    
-    await reach.setProviderByName('TestNet');
-    await reach.setSignStrategy('AlgoSigner');
-
-    const acc = await reach.getDefaultAccount();
-    
-    const balAtomic = await reach.balanceOf(acc);
-    
-    const bal = reach.formatCurrency(balAtomic, 4);
-    
-    this.setState({acc, bal});
+    this.setState({view:'DeployerOrAttacher'});
+    /*
     try {
       const faucet = await reach.getFaucet();
       this.setState({view: 'FundAccount', faucet});
@@ -37,6 +28,27 @@ class App extends React.Component {
       
       this.setState({view: 'DeployerOrAttacher'});
     }
+    */
+  }
+
+  async connectToAccount () {
+    let isConnected = false;
+    try{
+
+      await reach.setProviderByName('TestNet');
+      await reach.setSignStrategy('AlgoSigner');
+      const acc = await reach.getDefaultAccount();
+      const balAtomic = await reach.balanceOf(acc);
+      const bal = reach.formatCurrency(balAtomic, 4);
+      this.setState({acc, bal});
+      isConnected = true;
+      
+    }catch(error){
+      isConnected = false;
+      
+    }
+    return isConnected;
+
   }
   
   async fundAccount(fundAmount) {
@@ -45,8 +57,15 @@ class App extends React.Component {
   }
   async skipFundAccount() { this.setState({view: 'DeployerOrAttacher', home: true}); }
   //selectJoin() { this.setState({home:false, poster: true, subscriber: false, view: 'Wrapper', ContentView: Subscriber}); }
-  selectJoin() {this.setState({home:false, poster: false, subscriber: true, view: 'Wrapper', ContentView: Subscriber});}
-  selectCreate() { this.setState({home:false, subscriber: false, poster:true, view: 'Wrapper', ContentView: Poster}); }
+  selectJoin() { this.setState({home:false, poster: false, subscriber: true, view: 'Wrapper', ContentView: Subscriber});}
+  async selectCreate() {
+    let isConnected = await this.connectToAccount(); 
+    
+    if(isConnected) this.setState({home:false, subscriber: false, poster:true, view: 'Wrapper', ContentView: Poster}); 
+    else {
+      this.setState({home:false, view: 'NoAlgosigner'});
+    }
+  }
   aboutUs() {this.setState({home:false, view:'AboutUs'})}
   
   render() { return renderView(this, AppViews); }

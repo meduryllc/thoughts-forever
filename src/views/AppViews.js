@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './assets/tflogo.png'
 import loader from './assets/grid.svg'
 import all_logos from './assets/Reach-ThoughtsForever.png'
+import algosigner_image from './assets/algosigner.png'
 
 import teamMembers from './assets/sai-lalith.png'
 
@@ -141,6 +142,33 @@ exports.AboutUs = class extends React.Component {
             <br/><br/>
           </div>
         </div>
+       
+      </div>
+    );
+  }
+}
+
+exports.NoAlgosigner = class extends React.Component {
+  render() {
+    const {parent} = this.props;
+    
+    return (
+      <div >
+    
+        <img src={all_logos} />
+        <br />
+        <div style={{...card, textAlign: 'center'}}>
+          <img src={algosigner_image} style={{height: '20%', width: '20%'}}/> <br/>
+          This application is currently supporting Chrome Browser with Algosigner extension installed in it. You can download <a href="https://www.google.com/intl/en_in/chrome/">Chrome</a>, install <a href="https://chrome.google.com/webstore/detail/algosigner/kmmolakhbgdlpkjkcjkebenjheonagdm">Algosigner</a> and come back 
+          to start using this application.
+
+          <button
+                onClick={() => parent.skipFundAccount()}
+                style={{marginRight: "10px"}}
+              >Try Again</button>
+
+        </div>
+        
        
       </div>
     );
