@@ -5,7 +5,7 @@ import all_logos from './assets/Reach-ThoughtsForever.png'
 import algosigner_image from './assets/algosigner.png'
 
 import teamMembers from './assets/sai-lalith.png'
-
+import algoAddress from './assets/algorand-address.png'
 
 const exports = {};
 
@@ -16,11 +16,17 @@ exports.Wrapper = class extends React.Component {
     const home = this.props.content.props.parent.state.home;
     const poster = this.props.content.props.parent.state.poster;
     const subscriber = this.props.content.props.parent.state.subscriber;
-    /*
-        {poster ? null : (<button style={nav_buttons} onClick={() => parent.selectCreate()}>Start a Stream</button>) }
-              
-        {subscriber ? null: (<button style={nav_buttons} onClick={() => parent.selectJoin()}>Join a Stream</button>) }  
-    */
+    const displayQR = (this.state || {}).displayQR || false;
+
+    const showQR = () => {
+      this.setState({displayQR:true});  
+    }
+
+    const hideQR = () => {
+      this.setState({displayQR: false})
+    }
+
+   
     return (
       <div className="App" >
         
@@ -38,7 +44,10 @@ exports.Wrapper = class extends React.Component {
           <footer style={{position:'fixed', bottom:'0', width:'100%', backgroundColor:'#28363D'}}>
             
             <p style={{fontSize:'20px', color:'white'}}>&#169; Thoughts Forever 2021</p>
-            
+            <p style={{fontSize:'20px', color:'white'}}>If you like what you see, please donate to: <span onMouseEnter={showQR} onMouseLeave={hideQR}>RLTBH3Y32G7BGQBWWNFGHYTET76F4YKZ6B4LNCKZLFU36BTPJIRQKOEXOA</span></p>
+            { displayQR ? 
+              <img src={algoAddress} alt="RLTBH3Y32G7BGQBWWNFGHYTET76F4YKZ6B4LNCKZLFU36BTPJIRQKOEXOA" /> : null
+            }
           </footer>
         </header>
         
