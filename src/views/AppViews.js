@@ -43,10 +43,10 @@ exports.Wrapper = class extends React.Component {
           {content}
           <footer style={{position:'fixed', bottom:'0', width:'100%', backgroundColor:'#28363D'}}>
             
-            <p style={{fontSize:'20px', color:'white'}}>&#169; Thoughts Forever 2021</p>
-            <p style={{fontSize:'20px', color:'white'}}>If you like what you see, please donate to: <span onMouseEnter={showQR} onMouseLeave={hideQR}>RLTBH3Y32G7BGQBWWNFGHYTET76F4YKZ6B4LNCKZLFU36BTPJIRQKOEXOA</span></p>
+            <p style={{fontSize:'17px', color:'white'}}>&#169; Thoughts Forever 2021</p>
+            <p style={{fontSize:'15px', color:'white'}}>If you like what you see, please consider donating Algos to: <span onMouseEnter={showQR} onMouseLeave={hideQR}>UDCQSPHSOGK5TLCM5PWIHP3RIJ5MPC2MTQPCTQUJQYNYGI6SLJYKROQ3VQ</span></p>
             { displayQR ? 
-              <img src={algoAddress} alt="RLTBH3Y32G7BGQBWWNFGHYTET76F4YKZ6B4LNCKZLFU36BTPJIRQKOEXOA" /> : null
+              <img src={algoAddress} alt="UDCQSPHSOGK5TLCM5PWIHP3RIJ5MPC2MTQPCTQUJQYNYGI6SLJYKROQ3VQ" /> : null
             }
           </footer>
         </header>
