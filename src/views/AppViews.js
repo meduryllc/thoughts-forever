@@ -14,8 +14,7 @@ exports.Wrapper = class extends React.Component {
     const {content} = this.props;
     const parent = this.props.content.props.parent;
     const home = this.props.content.props.parent.state.home;
-    const poster = this.props.content.props.parent.state.poster;
-    const subscriber = this.props.content.props.parent.state.subscriber;
+    
     const displayQR = (this.state || {}).displayQR || false;
 
     const showQR = () => {
@@ -33,7 +32,7 @@ exports.Wrapper = class extends React.Component {
         <header className="App-header" id="root" style={{backgroundColor:'white'}} >
           {home ? null : 
             <div style={{textAlign: 'left'}}>
-              <img src={logo} style={{textAlign: 'left',display:'inline',verticalAlign:'top', height:'100px', marginLeft: '10%', width:'225px'}} onClick={() => parent.skipFundAccount()}/>
+              <img src={logo} alt="Thoughts Forever" style={{textAlign: 'left',display:'inline',verticalAlign:'top', height:'100px', marginLeft: '10%', width:'225px'}} onClick={() => parent.skipFundAccount()}/>
               
               <hr style={{backgroundColor:'steelblue'}}/>
               
@@ -62,7 +61,7 @@ exports.ConnectAccount = class extends React.Component {
     return (
       <div>
         Please wait while we connect to your account. <br/>
-        <img src={loader} style={{marginTop: '5%'}}/>
+        <img src={loader} alt="Loading" style={{marginTop: '5%'}}/>
       </div>
     )
   }
@@ -101,7 +100,7 @@ exports.DeployerOrAttacher = class extends React.Component {
       <div style={{marginTop: '10%'}}>
         
         <div style={card}>
-           <img src={logo} style={{height:'100%', marginLeft: '10%', width:'90%', marginBottom: '2%'}}/>
+           <img src={logo} alt="Thoughts Forever" style={{height:'100%', marginLeft: '10%', width:'90%', marginBottom: '2%'}}/>
             <br/>
             <em style={{fontSize:'60%'}}>Censorship-resistant Micro-blogging application.</em>
             <br />
@@ -127,12 +126,11 @@ exports.DeployerOrAttacher = class extends React.Component {
 
 exports.AboutUs = class extends React.Component {
   render() {
-    const {parent} = this.props;
     
     return (
       <div >
     
-        <img src={all_logos} />
+        <img src={all_logos} alt="Reach and Algorand" />
         <br />
         <div style={about_us}>
           About Us: 
@@ -142,7 +140,7 @@ exports.AboutUs = class extends React.Component {
             <br/>
             <div style={{marginTop:'5%'}}>
               
-                <img src={teamMembers} style={{height:'60%', width:'60%'}}/>
+                <img src={teamMembers} alt="Sai and Lalith" style={{height:'60%', width:'60%'}}/>
               
             </div><br/>
             The team members of this project are:<br/><br/> 
@@ -164,10 +162,10 @@ exports.NoAlgosigner = class extends React.Component {
     return (
       <div >
     
-        <img src={all_logos} />
+        <img src={all_logos} alt="Reach and Algorand" />
         <br />
         <div style={{...card, textAlign: 'center'}}>
-          <img src={algosigner_image} style={{height: '20%', width: '20%'}}/> <br/>
+          <img src={algosigner_image} alt="Algosigner" style={{height: '20%', width: '20%'}}/> <br/>
           This application is currently supporting Chrome Browser with Algosigner extension installed in it. You can download <a href="https://www.google.com/intl/en_in/chrome/">Chrome</a>, install <a href="https://chrome.google.com/webstore/detail/algosigner/kmmolakhbgdlpkjkcjkebenjheonagdm">Algosigner</a> and come back 
           to start using this application.
 
@@ -199,19 +197,6 @@ const card = {
 const about_us= {
   ...card,
   width: '80vw'
-}
-
-const nav_buttons = {
-  border: '2px solid black',
-  borderRadius: '5px',
-  color: 'black',
-  backgroundColor: 'white',
-  marginLeft: '2%',
-  width:'20%',
-  height:'10%',
-  textAlign: 'left',
-  marginTop: '0px',
-  display:'block'
 }
 
 export default exports;

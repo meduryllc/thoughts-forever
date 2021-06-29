@@ -56,7 +56,7 @@ exports.Attaching = class extends React.Component {
       <div className='CardAttach'>
         Subscribing {streamName}
         <br/>
-        <img src={loader} style={{marginTop: '5%'}}/>
+        <img src={loader} alt="Loading" style={{marginTop: '5%'}}/>
       </div>
     );
   }
@@ -89,7 +89,7 @@ exports.ViewStreamName = class extends React.Component {
 
 exports.ViewPost = class extends React.Component {
   render() {
-    const {parent, posts, alreadyViewed} = this.props;
+    const {posts} = this.props;
     
     var today = new Date();
     var month = parseInt(today.getMonth() + 1);
@@ -105,7 +105,7 @@ exports.ViewPost = class extends React.Component {
                
                 <div key={post.thought} className='SubscriberTweet'>
        
-                <span style={{fontSize: '20px', display:'inline'}}><img style={{width: '10%', height:'20%', display:'inline', verticalAlign:'top'}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/768px-User_icon_2.svg.png"/><strong>{post.address.substring(0,6)+'....'}</strong></span><p style={{color:'grey', fontSize:'20px', marginLeft:'1%', display:'inline'}}>@{post.stream} | {today}</p>
+                <span style={{fontSize: '20px', display:'inline'}}><img style={{width: '10%', height:'20%', display:'inline', verticalAlign:'top'}} alt="User" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/768px-User_icon_2.svg.png"/><strong>{post.address.substring(0,6)+'....'}</strong></span><p style={{color:'grey', fontSize:'20px', marginLeft:'1%', display:'inline'}}>@{post.stream} | {today}</p>
                 
                   <p style={{fontSize: '20px', marginLeft: '10%'}}>{post.thought}</p>
                 </div>
@@ -125,7 +125,7 @@ exports.WaitingForTurn = class extends React.Component {
         Please wait while we retrieve thoughts....
         <br />
 
-        <img src={loader} style={{marginTop: '5%'}}/>
+        <img src={loader} alt="Loading" style={{marginTop: '5%'}}/>
       </div>
     );
   }

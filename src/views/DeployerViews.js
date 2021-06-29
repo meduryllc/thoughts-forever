@@ -55,16 +55,16 @@ exports.Wrapper = class extends React.Component {
       <div className="Deployer" style={{display:'inline', float:'left', width:'100%'}}>
         <div className="Buttons">
           <div style={posterStyle} onClick={() => parent.selectCreate()} onMouseEnter={() => poster()} onMouseLeave={() => mouseLeave()}>
-            <img className="Icons" src={post} /> <p style={{display:'inline', fontSize:'60%'}}>Post Thoughts</p>
+            <img className="Icons" alt="Post" src={post} /> <p style={{display:'inline', fontSize:'60%'}}>Post Thoughts</p>
           </div>
           <div style={subscriberStyle} onClick={() => parent.selectView()} onMouseEnter={() => subscriber()} onMouseLeave={() => mouseLeave()}>
-            <img className="Icons" src={read} /> <p style={{display:'inline', fontSize:'60%'}}>Read Thoughts</p>
+            <img className="Icons" alt="Read" src={read} /> <p style={{display:'inline', fontSize:'60%'}}>Read Thoughts</p>
           </div>
           <div style={joinStyle} onClick={() => parent.selectJoin()} onMouseEnter={() => joinNewStream()} onMouseLeave={() => mouseLeave()}>
-            <img className="Icons" src={join} /> <p style={{display:'inline', fontSize:'60%'}}>Join Stream</p>
+            <img className="Icons" alt="Join" src={join} /> <p style={{display:'inline', fontSize:'60%'}}>Join Stream</p>
           </div>
           <div style={helpStyle} onClick={() => parent.help()} onMouseEnter={() => onHelp()} onMouseLeave={() => mouseLeave()}>
-            <img className="Icons" src={help} /> <p style={{display:'inline', fontSize:'60%'}}>Help</p>
+            <img className="Icons" alt="Help" src={help} /> <p style={{display:'inline', fontSize:'60%'}}>Help</p>
           </div>
          
         </div>
@@ -133,7 +133,7 @@ exports.Deploy = class extends React.Component {
 exports.Deploying = class extends React.Component {
   render() {
     return (
-      <div>Creating your stream... please wait.<br/><img style={{marginTop: '5%', color:'black'}} src={loader}/></div>
+      <div>Creating your stream... please wait.<br/><img style={{marginTop: '5%', color:'black'}} alt="Loading" src={loader}/></div>
       
     );
   }
@@ -193,20 +193,20 @@ exports.Help = class extends React.Component {
           <strong>Software Requirements:</strong> Google Chrome browser and AlgoSigner extension<br/><br/>
           <strong>Creating a new stream:</strong>
           <ul>
-          <li>To create a stream, click on<img className='Icons' src={post} /> Post Thoughts on the top.</li> <br/>
+          <li>To create a stream, click on<img className='Icons'  alt="Post" src={post} /> Post Thoughts on the top.</li> <br/>
           <li>After providing a name to the stream and clicking on deploy, the contract information will be displayed on the screen.</li> <br/>
           <li>Share this info with your friends so that they can subscribe to your stream and start following your thoughts</li> <br/>
           <li><strong>Note:</strong> Atleast one user must subscribe to your stream before you can start sharing your thoughts.</li> <br/>
           </ul>
           <strong>Joining a stream:</strong>
           <ul>
-            <li>To join a stream, click on<img className='Icons' src={join} /> Join Stream on the top. </li> <br/>
+            <li>To join a stream, click on<img className='Icons' alt="Join" src={join} /> Join Stream on the top. </li> <br/>
             <li>You should have received the Contract Info of a stream created by your friend. If not, please ask your friend to share it</li><br/>
             <li>Enter the contract information shared that your friend (the creator of the stream) shared to subscribe.</li> <br/>
           </ul>
           <strong>Read Thoughts:</strong>
           <ul>
-            <li>In the <img className='Icons' src={read} /> Read Thoughts section, you can view all the thoughts from the streams you've subscribed to earlier.</li> <br/>
+            <li>In the <img className='Icons' alt="Read" src={read} /> Read Thoughts section, you can view all the thoughts from the streams you've subscribed to earlier.</li> <br/>
             <li>You'll be able to view thoughts posted by the creator after subscribing to the stream.</li> <br/>
             <li>You can join unlimited streams.</li><br/>
           </ul>
@@ -228,7 +228,7 @@ exports.PostThought = class extends React.Component {
     var months = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     today=months[month]+' '+today.getDate();
     var printPosts='';
-    if(posts.length!=0) printPosts='Thoughts so far:';
+    if(posts.length!==0) printPosts='Thoughts so far:';
     
     return (
       <div >
@@ -254,7 +254,7 @@ exports.PostThought = class extends React.Component {
            
             <div key={post} className='Tweet'>
     
-            <span style={{fontSize: '20px', display:'inline'}}><img style={{width: '10%', height:'20%', display:'inline', verticalAlign:'top'}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/768px-User_icon_2.svg.png"/><strong>{userAddress}</strong></span><p style={{color:'grey', fontSize:'20px', marginLeft:'1%', display:'inline'}}>@{streamName} | {today}</p>
+            <span style={{fontSize: '20px', display:'inline'}}><img style={{width: '10%', height:'20%', display:'inline', verticalAlign:'top'}} alt="User" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/768px-User_icon_2.svg.png"/><strong>{userAddress}</strong></span><p style={{color:'grey', fontSize:'20px', marginLeft:'1%', display:'inline'}}>@{streamName} | {today}</p>
             
               <p style={{fontSize: '20px', marginLeft: '10%'}}>{post}</p>
             </div>
@@ -276,7 +276,7 @@ exports.SeePost = class extends React.Component {
       <div >
         Uploading your thought.... please wait.
         <br/>
-        <img src={loader} style={{marginTop: '5%'}}/>
+        <img src={loader} alt="Loading" style={{marginTop: '5%'}}/>
          
       </div>
     );

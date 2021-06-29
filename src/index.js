@@ -129,8 +129,8 @@ class Poster extends User {
   async postThought(thought) { this.state.resolvePostedP(thought); }
 
   async continue(decision) { 
-    if(decision == 'Continue') decision = 0;
-    else if(decision == 'Stop') decision = 1;
+    if(decision === 'Continue') decision = 0;
+    else if(decision === 'Stop') decision = 1;
     this.state.resolveContinueP(decision);
   }
 
@@ -195,7 +195,7 @@ class Subscriber extends User {
 
   subscribe(yesOrNo) {
     
-    if(yesOrNo == 'Yes'){
+    if(yesOrNo === 'Yes'){
       this.state.resolveAcceptedP();
       this.setState({view: 'WaitingForTurn', joining:true});
     }
